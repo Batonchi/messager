@@ -1,1 +1,5 @@
 DBNAME = ''
+HOST = ''
+PORT = ''
+USER = ''
+PASSWORD = ''
