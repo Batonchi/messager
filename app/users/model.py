@@ -8,17 +8,8 @@ class Users:
         self.password = password
         self.user_id = user_id
 
-
-class Passwords:
-
-    def __init__(self, pass_text, password_id=None):
-        self.pass_text = pass_text
-        self.password_id = password_id
-
-
 class Friends:
 
-    def __init__(self, friend_1, friend_2, friend_id=None):
-        self.friend_1 = friend_1
-        self.friend_2 = friend_2
+    def __init__(self, user_id, friend_id):
+        self.user_id = user_id
         self.friend_id = friend_id
