@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from datetime import date
 from app.users.service import UserService
@@ -19,9 +19,9 @@ def login(email: str, password: str):
     return UserService.find_by_email_and_password(email, password)
 
 @router.get('/registration')
-def registration_page(response: Response):
-    return templates.TemplateResponse('registration.html', {'response': response})
+def registration_page(request: Request):
+    return templates.TemplateResponse('registration.html', {'request': request})
 
 @router.get('/login')
-def login_page(response: Response):
-    return templates.TemplateResponse('login.html', {'response': response})
+def login_page(request: Request):
+    return templates.TemplateResponse('login.html', {'request': request})
