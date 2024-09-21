@@ -1,4 +1,4 @@
-from app.users.model import Friends, Passwords, Users
+from app.users.model import Friends, Users
 from app.utils.database import get_connection
 
 
@@ -11,12 +11,34 @@ class UserService:
         cursor.execute(query, values)
         conn.commit()
 
+    @staticmethod
+    def find_by_email_and_password(email, password):
+        conn, cursor = get_connection()
+        query = 'select * from users where email=%s and password=%s'
+        values = (email, password)
+        cursor.execute(query, values)
+        result = cursor.fetchone()
+        if not result:
+            return None
+        user = Users(result[1], result[2], result[3], result[4], None, result[0])
+        return user
+
 
 class FriendService:
     @staticmethod
     def save(friend: Friends):
         conn, cursor = get_connection()
-        query = 'insert into friends (friend_1, friend_2) values (%s, %s)'
-        values = (friend.friend_1, friend.friend_2)
+        query = 'insert into friends (user_id, friend_id) values (%s, %s)'
+        values = (friend.user_id, friend.friend_id)
+        cursor.execute(query, values)
+        conn.commit()
+
+
+class NotificationService:
+    @staticmethod
+    def save(friend: Friends):
+        conn, cursor = get_connection()
+        query = 'insert into notification (user_id, friend_id) values (%s, %s)'
+        values = (friend.user_id, friend.friend_id)
         cursor.execute(query, values)
         conn.commit()
