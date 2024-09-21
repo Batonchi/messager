@@ -13,6 +13,19 @@ class PrivateMessagesService:
         cursor.execute(query, values)
         conn.commit()
 
+    @staticmethod
+    def find_chat(user1_id: str, user2_id: str):
+        conn, cursor = get_connection()
+        query = 'select * from where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
+        values = (user1_id, user2_id, user2_id, user1_id)
+        cursor.execute(query, values)
+        results = cursor.fetchall()
+        messages = []
+        if not results:
+            return messages
+        messages = [PrivateMessages(result[1], result[2], result[3], result[4], result[0]) for result in results]
+        return messages
+
 
 class GroupMassagesService:
     @staticmethod
