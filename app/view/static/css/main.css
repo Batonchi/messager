@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-wrap: nowrap;
+}
+h1 {
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 116px;
+}
+
+body {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 23px;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*Начало секции*/
+.forward {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#back {
+    z-index: 0;
+    position: absolute;
+}
+
+.flex_title_with_birds {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100vw;
+    height: max-content;
+}
+
+.birds {
+    width: 230px;
+    height: 150px;
+}
+
+.flex_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100vw;
+    height: 30vh;
+    padding-top: 150px;
+}
+
+.log  a {
+    display: block;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(78,  73, 47);
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    width: 550px;
+    height: 120px;
+    text-align: center;
+    font-size: 64px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    flex-grow: none;
+}
+
+.log p {
+    font-size: 48px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 700;
+    font-style: normal;
+    width: 550px;
+    text-wrap: wrap;
+    text-align: center;
+}
+
+#text {
+    color: white;
+    padding-top: 150px;
+    width: max-content;
+    font-size: 42px;
+}
+
+/*Конец секции*/
