@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
-from fastapi.response import RedirectResponse
-from starlette.exeptions import HTTPExeption
+from fastapi.responses import RedirectResponse
+from starlette.exceptions import HTTPException
 from datetime import date
 from app.users.service import UserService
 from app.users.model import Users, UsersForm
@@ -14,13 +14,12 @@ templates = Jinja2Templates(directory='app/view')
 
 @router.post('/registration')
 def registration(user_form: UsersForm):
-    user = Users(UsersForm.first_name, UsersForm.last_name, UsersForm.email, UsersForm.birth_date, UsersForm.password)
+    user = Users(user_form.first_name, user_form.last_name, user_form.email, user_form.birth_date, user_form.password)
     try:
         UserService.save(user)
     except Exception as ex:
         print(ex)
-        raise HTTPExeption(status_code=409)
-    return RedirectResponse(url='/login')
+        raise HTTPException(status_code=409)
 
 
 @router.post('/login')

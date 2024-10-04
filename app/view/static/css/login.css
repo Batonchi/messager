@@ -13,7 +13,14 @@ body {
     font-family: "LXGW WenKai Mono TC", monospace;
     font-weight: 400;
     font-style: normal;
-    font-size: 23px;
+    font-size: 28px;
+}
+
+h1 {
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 80px;
 }
 
 .bird-grey-1 {
@@ -31,14 +38,10 @@ body {
 /*секция начало*/
 .background {
     margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    background-color: rgb(255, 255, 255);
+    height: max-content;
     width: 600px;
-    height: 800px;
+    background-color: rgb(255, 255, 255);
+    padding: 5.5%;
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
@@ -46,31 +49,31 @@ body {
     -o-border-radius: 25px;
 }
 
-h1 {
-    font-family: "Lilita One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 80px;
-}
-
-.title_flex {
+.header_flex {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 600px;
+    align-content: center;
+    justify-content: center;
+    width: max-content;
 }
 
-.first_title_h2 {
-    align-self: flex-start;
-    padding-left: 20px;
+.background .header_flex .flex_1 {
+    display: flex;
+    width: max-content;
+    gap : 290px;
 }
 
-.last_title_h2 {
+.header_flex h2 {
     align-self: flex-end;
-    padding-right: 30px;
+}
+
+.arrow {
+    display: block;
+    align-self: flex-end;
 }
 
 #registration {
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -81,6 +84,10 @@ h1 {
     height: 60px;
     border: none;
     border-radius: 50px;
+    color: white;
+    padding-left: 30px;
+    font-size: 25px;
+    font-weight: 400;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
@@ -89,7 +96,6 @@ h1 {
 }
 
 #registration input::placeholder {
-    padding-left: 30px;
     font-family: "LXGW WenKai Mono TC", monospace;
     font-weight: 400;
     font-style: normal;
@@ -98,31 +104,24 @@ h1 {
 }
 
 #registration input:focus {
-    padding-left: 30px;
     font-family: "LXGW WenKai Mono TC", monospace;
+    border: 0px !important;
     font-weight: 400;
     font-style: normal;
     font-size: 27px;
     color: rgb(255, 255, 255);
 }
 
-#registration input:focus ::placeholder {
-    font-family: "LXGW WenKai Mono TC", monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 27px;
-    color: rgb(255, 255, 255);
-    padding-left: 30px;
+input:disabled:focus {
+    font-size: 300px;
 }
 
-#button_form {
-    width: 450px;
+button {
+    width: 100%;
+    padding: 10px;
+    min-height: 70px;
     height: 70px;
     text-align: center;
-    font-family: "LXGW WenKai Mono TC", monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 25px;
     border: 3px solid rgb(81, 81, 81);
     background-color: white;
     border-radius: 50px;
@@ -130,26 +129,46 @@ h1 {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    margin-bottom: 75px;
     margin-top: 35px;
 }
 
-.arrow {
-    justify-self: start;
-    position: relative;
-    top: 80px;
-    left: 250px;
+button a {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
 }
 
-.bird-green-1 {
-    position: fixed;
-    top: 40px;
-    left: 5px;
+button:hover {
+    border: none;
+    background-color: rgb(170, 150, 99) !important;
+    color: white;
 }
 
-.bird-green-2 {
-    position: fixed;
-    top: 0px;
-    right: 50px;
+input[type='date'] {
+    color: white;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+input[type='date']::placeholder {
+    color: white;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.flex_buttons {
+    display: flex;
+    gap: 70px;
+    justify-content: space-between;
 }
 /*конец секции*/

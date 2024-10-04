@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(72, 72, 72);
+    display: flex;
+    justify-content: center;
+}
+
+.background {
+    z-index: -1;
+    padding-top: 10px;
+    display: block;
+    width: 1980px;
+    height: 1080px;
+}
+
+.forward{
+    margin-top: 180px;
+    z-index: 0;
+    position: absolute;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.your-profile {
+    width: 471px;
+    height: 93px;
+    text-align: center;
+    color: white;
+    font-size: 64px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border: solid 10px rgb(170, 150, 99);
+    background-color: rgb(81, 81, 81);
+}
+
+.flex_buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    gap: 10px;
+}
+
+.flex_buttons button {
+    width: 100%;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border: solid 10px rgb(170, 150, 99);
+    background-color: rgb(81, 81, 81);
+}
+
+.flex_buttons button a {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.data {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 620px;
+    border: solid 1px rgb(170, 150, 99);
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.data input {
+    background-color: rgb(170, 150, 99);
+    width: 534px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 28px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border: none !important;
+    padding-left: 30px;
+}
+
+.data input::placeholder {
+    color: white;
+}
+

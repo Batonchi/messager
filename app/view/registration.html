@@ -11,27 +11,29 @@
 </head>
 <body>
     <img src="static/images/registration/grey_left_bird.svg" alt="" class="bird-grey-1">
-    <img src="static/images/registration/grey_right_bird.svg" alt="" class="bird-grey-2">
-    <section class="background">
-        <!-- <img src="static/images/registration/green_bird.svg" alt="" class="bird-green-1">
-        <img src="static/images/registration/green_bird_right.svg" alt="" class="bird-green-2"> -->
-        <a><img src="static/images/registration/arrow-left.svg" alt="" class="arrow"></a>
-        <div class="title_flex">
-            <h2 class="first_title_h2">Залетай</h2>
-            <h1>GOSSCHATTER</h1>
-            <h2 class="last_title_h2">Почирикаем</h2>
+    <section>
+        <div class="background">
+            <div class="header_flex">
+                <div class="flex_1">
+                    <h2 class="first_title_h2">Залетай</h2>
+                    <a href="/main"><img src="static/images/registration/arrow-left.svg" alt="" class="arrow"></a>
+                </div>
+                <h1>GOSSCHATTER</h1>
+                <h2 class="last_title_h2">Почирикаем</h2>
+            </div>
+            <form action="" class="reigistration" , method="get" id="registration">
+                <input type="text" name="first_name" placeholder="Имя" required>
+                <input type="text" name="last_name" placeholder="Фамилия" required>
+                <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <input type="date" name="birth_date" placeholder="Дата рождения" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <input type="password" name="repeat_password" placeholder="Повторите пароль" required>
+            </form>
+            <button form="registration" id="button_form">Зарегистироваться</button>
         </div>
-        <form action="" class="reigistration", method="get" id="registration">
-            <input type="text" name="first_name" placeholder="Имя" required>
-            <input type="text" name="last_name" placeholder="Фамилия" required>
-            <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-            <input type="date" name="birth_date" placeholder="Дата рождения" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <input type="password" name="repeat_password" placeholder="Повторите пароль" required>
-        </form>
-        <button form="registration" id="button_form">Зарегистироваться</button>
     </section>
-    <link rel="stylesheet" href="static/css/loginandregr.css">
+    <img src="static/images/registration/grey_right_bird.svg" alt="" class="bird-grey-2">
+    <link rel="stylesheet" href="static/css/registaration.css">
     <script src="static/js/registration.js"></script>
 </body>
 </html>

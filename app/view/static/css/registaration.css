@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(228, 219, 196);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 28px;
+}
+
+h1 {
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 80px;
+}
+
+.bird-grey-1 {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
+
+.bird-grey-2 {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+}
+
+/*секция начало*/
+.background {
+    margin-top: 10vh;
+    height: max-content;
+    width: 600px;
+    background-color: rgb(255, 255, 255);
+    padding: 5.5%;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+
+.header_flex {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: max-content;
+}
+
+.background .header_flex .flex_1 {
+    display: flex;
+    width: max-content;
+    gap : 290px;
+}
+
+.header_flex h2 {
+    align-self: flex-end;
+}
+
+.arrow {
+    display: block;
+    align-self: flex-end;
+}
+
+#registration {
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#registration input {
+    width: 534px;
+    height: 60px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding-left: 30px;
+    font-size: 25px;
+    font-weight: 400;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    background-color: rgb(81, 81, 81);
+}
+
+#registration input::placeholder {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 27px;
+    color: rgb(255, 255, 255);
+}
+
+#registration input:focus {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    border: 0px !important;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 27px;
+    color: rgb(255, 255, 255);
+}
+
+input:disabled:focus {
+    font-size: 300px;
+}
+
+#button_form {
+    margin-left: 50px;
+    min-width: 450px;
+    width: 450px;
+    min-height: 70px;
+    height: 70px;
+    text-align: center;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    border: 3px solid rgb(81, 81, 81);
+    background-color: white;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    margin-top: 35px;
+}
+
+#button_form:hover {
+    border: none;
+    background-color: rgb(170, 150, 99) !important;
+    color: white;
+}
+
+input[type='date'] {
+    color: white;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    padding-left: 30px;
+}
+
+input[type='date']::placeholder {
+    color: white;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+
+/*конец секции*/

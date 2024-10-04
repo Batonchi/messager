@@ -28,5 +28,6 @@ document.getElementById('button_form').addEventListener('click', async (event) =
         alert("Ой! Что то пошло не так :(")
         return
     }
+    window.location.href="/login"
 })
 

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import date
 
 class Users():
 
@@ -18,7 +19,7 @@ class UsersForm(BaseModel):
     first_name: str
     last_name: str
     email: str
-    birth_date: str
+    birth_date: date
     password: str 
 
 

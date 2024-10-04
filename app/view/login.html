@@ -11,20 +11,27 @@
 </head>
 <body>
     <img src="static/images/registration/grey_left_bird.svg" alt="" class="bird-grey-1">
-    <img src="static/images/registration/grey_right_bird.svg" alt="" class="bird-grey-2">
-    <section class="background">
-        <a><img src="static/images/registration/arrow-left.svg" alt="" class="arrow"></a>
-        <div class="title_flex">
-            <h2 class="first_title_h2">Залетай</h2>
-            <h1>GOSSCHATTER</h1>
-            <h2 class="last_title_h2">Почирикаем</h2>
+    <section>
+        <div class="background">
+            <div class="header_flex">
+                <div class="flex_1">
+                    <h2 class="first_title_h2">Залетай</h2>
+                    <a href="/main"><img src="static/images/registration/arrow-left.svg" alt="" class="arrow"></a>
+                </div>
+                <h1>GOSSCHATTER</h1>
+                <h2 class="last_title_h2">Почирикаем</h2>
+            </div>
+            <form action="" class="reigistration" , method="get" id="registration">
+                <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <input type="password" name="password" placeholder="Пароль" required>
+            </form>
+            <div class="flex_buttons">
+                <button><a href="/registration">Регистрация</a></button>
+                <button form="registration"><a href="">Вход</a></button>
+            </div>
         </div>
-        <form action="" class="reigistration", method="get" id="registration">
-            <input type="text" placeholder="Имя">
-            <input type="text" placeholder="Пароль">
-        </form>
-        <button form="registration" id="button_form">Зарегистироваться</button>
     </section>
-    <link rel="stylesheet" href="static/css/loginandregr.css">
+    <img src="static/images/registration/grey_right_bird.svg" alt="" class="bird-grey-2">
+    <link rel="stylesheet" href="static/css/login.css">
 </body>
 </html>

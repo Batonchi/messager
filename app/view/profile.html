@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC:wght@300;400;700&family=Lilita+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <img src="/static/images/profile/backround.svg" alt="конь в пальто" class="background">
+    <section class="forward">
+        <div class="your-profile">Твой профиль</div>
+        <form action="" class="data" , method="get">
+            <input type="text" name="first_name" placeholder="Имя" required>
+            <input type="text" name="last_name" placeholder="Фамилия" required>
+            <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <input type="date" name="birth_date" placeholder="Дата рождения" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+        </form>
+        <div class="flex_buttons">
+            <button><a href="">Отменить</a></button>
+            <button><a href="">Принять</a></button>
+        </div>
+    </section>
+    <link rel="stylesheet" href="/static/css/profile.css">
+</body>
+</html>
