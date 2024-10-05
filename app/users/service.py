@@ -1,5 +1,5 @@
 from app.users.model import Friends, Users
-from app.utils.database import get_connection
+from database import get_connection
 
 
 class UserService:

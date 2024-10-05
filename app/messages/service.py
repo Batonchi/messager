@@ -1,5 +1,5 @@
 from app.messages.model import PrivateMessages, GroupMessages
-from app.utils.database import get_connection
+from database import get_connection
 
 
 class PrivateMessagesService:

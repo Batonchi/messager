@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from starlette.exceptions import HTTPException
 from datetime import date
 from app.users.service import UserService
 from app.users.model import Users, UsersForm
+from auth.service import create_token
 
 
 router = APIRouter()
@@ -23,8 +24,13 @@ def registration(user_form: UsersForm):
 
 
 @router.post('/login')
-def login(email: str, password: str):
-    return UserService.find_by_email_and_password(email, password)
+def login(response: Response, email: str, password: str):
+    user = UserService.find_by_email_and_password(email, password)
+    if not user:
+         raise HTTPException(status_code=409, detail="Пользователь не найден! Неверный логин или пароль!")
+    token = create_token(email, password)
+    response.set_cookie("token", token, httponly=True)
+    return user.id
 
 
 @router.get('/registration')

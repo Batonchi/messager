@@ -1,5 +1,5 @@
 import psycopg2
-from app.utils.constant import *
+from constant import *
 
 
 def get_connection():

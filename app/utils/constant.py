@@ -1,5 +1,0 @@
-DBNAME = 'Messager'
-HOST = 'localhost'
-PORT = '5432'
-USER = 'postgres'
-PASSWORD = 'glebtosee'
