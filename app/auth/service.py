@@ -3,6 +3,7 @@ from fastapi import Request, HTTPException
 from app.users.service import UserService
 from constant import SECRET_KEY, ALGORITHM
 
+
 def create_token(email: str, password: str):
     data = {"email": email, "password": password}
     token = jwt.encode(data, SECRET_KEY, ALGORITHM)

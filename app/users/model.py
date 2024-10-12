@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 from datetime import date
 
-class Users():
+
+class Users:
 
     def __init__(self, first_name, last_name,  email, birth_date, password=None, user_id=None):
         if user_id:
@@ -12,6 +13,7 @@ class Users():
         self.birth_date = birth_date
         if password:
             self.password = password
+
 
 class UsersForm(BaseModel):
 
