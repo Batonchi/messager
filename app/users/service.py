@@ -1,6 +1,5 @@
 from app.users.model import Friends, Users
 from database import get_connection
-from app.auth.service import hash_password
 
 
 class UserService:
@@ -16,7 +15,7 @@ class UserService:
     def find_by_email_and_password(email, password):
         conn, cursor = get_connection()
         query = 'select * from users where email=%s and password=%s'
-        values = (email, hash_password(password))
+        values = (email, password)
         cursor.execute(query, values)
         result = cursor.fetchone()
         if not result:

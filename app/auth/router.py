@@ -5,8 +5,7 @@ from starlette.exceptions import HTTPException
 from datetime import date
 from app.users.service import UserService
 from app.users.model import Users, UsersForm
-from app.auth.service import create_token
-from app.auth.service import hash_password
+from app.auth.service import create_token, hash_password
 
 
 router = APIRouter()
