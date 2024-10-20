@@ -23,7 +23,7 @@ def get_user_by_token(request: Request):
         try:
             data = jwt.decode(token, SECRET_KEY, ALGORITHM)
         except Exception:
-            raise HTTPException(status_code=401, detail="Пожалуйста войдите в аккаунт!")
+            raise HTTPException(status_code=403, detail="Пожалуйста войдите в аккаунт!")
         user = UserService.find_by_email_and_password(data['email'], data['password'])
         if not user:
             raise HTTPException(status_code=409, detail="Пользователь не найден! Неверный логин или пароль!")
