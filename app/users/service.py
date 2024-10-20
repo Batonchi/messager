@@ -1,5 +1,6 @@
 from app.users.model import Friends, Users
 from database import get_connection
+from app.auth.service import hash_password
 
 
 class UserService:
@@ -15,13 +16,28 @@ class UserService:
     def find_by_email_and_password(email, password):
         conn, cursor = get_connection()
         query = 'select * from users where email=%s and password=%s'
-        values = (email, password)
+        values = (email, hash_password(password))
         cursor.execute(query, values)
         result = cursor.fetchone()
         if not result:
             return None
         user = Users(result[1], result[2], result[3], result[4], None, result[0])
         return user
+
+    @staticmethod
+    def find_by_any(search):
+        conn, cursor = get_connection()
+        search_words = search.split()
+        values = []
+        query = 'select * from users where '
+        for word in search_words:
+            query += '(firs_name ILIKE %s or last_name ILIKE %s) or '
+            values.extend([word, word])
+        query = query[: -3]
+        cursor.execute(query, values)
+        results = cursor.fetchall()
+        users = [Users(result[1], result[2], result[3], result[4], None, result[0]) for result in results]
+        return users
 
 
 class FriendService:

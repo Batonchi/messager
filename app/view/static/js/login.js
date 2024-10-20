@@ -1,9 +1,9 @@
 document.getElementById('registration').addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    const reg_form = document.getElementById('login')
+    const reg_form = document.getElementById('registration')
 
-    response = await fetch(`/login?email=${reg_form.email.value}&password${reg_form.password.value}`, {
+    response = await fetch(`/login?email=${reg_form.email.value}&password=${reg_form.password.value}`, {
         method: "POST"
     })
     if (response.status == 404) {
@@ -13,5 +13,5 @@ document.getElementById('registration').addEventListener('submit', async (event)
         alert("Ой! Что то пошло не так :(")
         return
     }
-    window.location.href="/"
+    window.location.href="/users/profile"
 })
