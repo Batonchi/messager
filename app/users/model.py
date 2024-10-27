@@ -1,10 +1,11 @@
+from fastapi import UploadFile
 from pydantic import BaseModel
 from datetime import date
 
 
 class Users:
 
-    def __init__(self, first_name, last_name,  email, birth_date, photo_of_profile, about=None, password=None,
+    def __init__(self, first_name, last_name,  email, birth_date, photo_of_profile=None, about=None, password=None,
                  user_id=None):
         if user_id:
             self.user_id = user_id
@@ -12,7 +13,8 @@ class Users:
         self.last_name = last_name
         self.email = email
         self.birth_date = birth_date
-        self.photo_of_profile = photo_of_profile
+        if photo_of_profile:
+            self.photo_of_profile = photo_of_profile
         if about:
             self.about = about
         if password:
@@ -26,8 +28,8 @@ class UsersForm(BaseModel):
     last_name: str
     email: str
     birth_date: date
-    photo_of_profile: str
-    about: str
+    photo_of_profile: UploadFile = None
+    about: str = None
     password: str 
 
 

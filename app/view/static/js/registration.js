@@ -14,6 +14,11 @@ document.getElementById('button_form').addEventListener('click', async (event) =
         birth_date: reg_form.birth_date.value,
         password: reg_form.password.value,
     }
+    const avatar = reg_form.photo_of_profile.files[0]
+    if (avatar) {
+        user['photo_of_profile'] = avatar
+    }
+    console.log(user)
     response = await fetch('/registration', {
         method: "POST",
         headers: {

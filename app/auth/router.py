@@ -1,3 +1,6 @@
+import uuid
+import os
+import shutil
 from fastapi import APIRouter, Request, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
@@ -15,8 +18,16 @@ templates = Jinja2Templates(directory='app/view')
 
 @router.post('/registration')
 async def registration(user_form: UsersForm):
+    photo_uuid = uuid.uuid4()
     user = Users(user_form.first_name, user_form.last_name, user_form.email, user_form.birth_date,
-                 hash_password(user_form.password))
+                 photo_of_profile=photo_uuid,
+                 password=hash_password(user_form.password))
+    path = os.path.join('app/view/static/avatars', f'{photo_uuid}.png')
+    if user_form.photo_of_profile:
+        with open(path, 'wb') as img:
+            img.write(await user_form.photo_of_profile.read())
+    else:
+        shutil.copy('app/view/static/avatars/default.png', path)
     try:
         UserService.save(user)
     except Exception as ex:
