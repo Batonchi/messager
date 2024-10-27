@@ -4,13 +4,17 @@ from datetime import date
 
 class Users:
 
-    def __init__(self, first_name, last_name,  email, birth_date, password=None, user_id=None):
+    def __init__(self, first_name, last_name,  email, birth_date, photo_of_profile, about=None, password=None,
+                 user_id=None):
         if user_id:
             self.user_id = user_id
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.birth_date = birth_date
+        self.photo_of_profile = photo_of_profile
+        if about:
+            self.about = about
         if password:
             self.password = password
 
@@ -22,6 +26,8 @@ class UsersForm(BaseModel):
     last_name: str
     email: str
     birth_date: date
+    photo_of_profile: str
+    about: str
     password: str 
 
 

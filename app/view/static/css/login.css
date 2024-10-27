@@ -6,21 +6,32 @@
 
 body {
     background-color: rgb(228, 219, 196);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     font-family: "LXGW WenKai Mono TC", monospace;
     font-weight: 400;
     font-style: normal;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     font-size: 28px;
 }
 
 h1 {
     font-family: "Lilita One", sans-serif;
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal;
     font-size: 80px;
+    color: rgb(170, 150, 100);
+    letter-spacing: 5px;
+}
+
+h1 span {
+    color: rgb(179, 169, 145);
+    letter-spacing: 5px;
+}
+
+h2 {
+    color: rgb(170, 150, 100);
 }
 
 .bird-grey-1 {
@@ -37,11 +48,12 @@ h1 {
 
 /*секция начало*/
 .background {
-    margin-top: 10vh;
+    margin-top: 165px;
     height: max-content;
-    width: 600px;
-    background-color: rgb(255, 255, 255);
+    width: 680px;
+    background-color: none !important;
     padding: 5.5%;
+    z-index: 0;
     border-radius: 25px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
@@ -50,6 +62,7 @@ h1 {
 }
 
 .header_flex {
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -57,7 +70,7 @@ h1 {
     width: max-content;
 }
 
-.background .header_flex .flex_1 {
+.header_flex .flex_1 {
     display: flex;
     width: max-content;
     gap : 290px;
@@ -67,24 +80,31 @@ h1 {
     align-self: flex-end;
 }
 
+.flex_1 {
+    display: flex;
+    gap: 50px;
+}
+
 .arrow {
     display: block;
     align-self: flex-end;
+    padding-left: 100px;
 }
 
-#registration {
+#login {
     padding-top: 90px;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-#registration input {
-    width: 534px;
+#login input {
+    width: 600px;
     height: 60px;
     border: none;
     border-radius: 50px;
     color: white;
+    letter-spacing: 3px;
     padding-left: 30px;
     font-size: 25px;
     font-weight: 400;
@@ -92,10 +112,12 @@ h1 {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    background-color: rgb(81, 81, 81);
+    background-color: rgb(72, 72, 72);
+    outline: none;
 }
 
-#registration input::placeholder {
+#login input::placeholder {
+    outline: none;
     font-family: "LXGW WenKai Mono TC", monospace;
     font-weight: 400;
     font-style: normal;
@@ -103,27 +125,24 @@ h1 {
     color: rgb(255, 255, 255);
 }
 
-#registration input:focus {
+#login input:focus {
+    outline: none;
     font-family: "LXGW WenKai Mono TC", monospace;
     border: 0px !important;
     font-weight: 400;
     font-style: normal;
     font-size: 27px;
     color: rgb(255, 255, 255);
-}
-
-input:disabled:focus {
-    font-size: 300px;
+    border: solid 0px black !important;
 }
 
 button {
     width: 100%;
-    padding: 10px;
-    min-height: 70px;
-    height: 70px;
+    min-height: 50px;
+    height: 20px;
     text-align: center;
-    border: 3px solid rgb(81, 81, 81);
-    background-color: white;
+    border: 3px solid rgb(72, 72, 72);
+    background-color: rgb(81, 81, 81);
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -138,12 +157,12 @@ button a {
     font-style: normal;
     font-size: 25px;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 button:hover {
     border: none;
-    background-color: rgb(170, 150, 99) !important;
+    background-color: rgb(72, 72, 72) !important;
     color: white;
 }
 
@@ -172,3 +191,11 @@ input[type='date']::placeholder {
     justify-content: space-between;
 }
 /*конец секции*/
+/* Background image formate*/
+#background {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    width: max-content;
+    height: max-content;
+}

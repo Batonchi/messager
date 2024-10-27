@@ -11,6 +11,7 @@
 </head>
 <body>
     <img src="static/images/registration/grey_left_bird.svg" alt="" class="bird-grey-1">
+    <img src="/static/images/login/backround.svg" alt="" id="background">
     <section>
         <div class="background">
             <div class="header_flex">
@@ -18,21 +19,20 @@
                     <h2 class="first_title_h2">Залетай</h2>
                     <a href="/main"><img src="static/images/registration/arrow-left.svg" alt="" class="arrow"></a>
                 </div>
-                <h1>GOSSCHATTER</h1>
+                <h1>GO<span>SS</span>CHA<span>TT</span>ER</h1>
                 <h2 class="last_title_h2">Почирикаем</h2>
             </div>
-            <form action="" class="reigistration" , method="get" id="registration">
-                <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <form action="" class="login" method="get" id="login">
+                <input type="email" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <input type="password" name="password" placeholder="Пароль" required>
             </form>
             <div class="flex_buttons">
                 <button><a href="/registration">Регистрация</a></button>
-                <button form="registration" id="button_form">Вход</button>
+                <button form="registration"><a href="">Вход</a></button>
             </div>
         </div>
     </section>
     <img src="static/images/registration/grey_right_bird.svg" alt="" class="bird-grey-2">
     <link rel="stylesheet" href="static/css/login.css">
-    <script src="static/js/login.js"></script>
 </body>
 </html>

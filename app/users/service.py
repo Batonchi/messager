@@ -6,8 +6,10 @@ class UserService:
     @staticmethod
     def save(user: Users):
         conn, cursor = get_connection()
-        query = 'insert into users (first_name, last_name, email, birth_date, password) values (%s, %s, %s, %s, %s)'
-        values = (user.first_name, user.last_name, user.email, user.birth_date, user.password)
+        query = ('insert into users (first_name, last_name, email, birth_date, photo_of_profile, about, password) '
+                 'values (%s, %s, %s, %s, %s, %s, %s)')
+        values = (user.first_name, user.last_name, user.email, user.birth_date, user.photo_of_profile,
+                  user.about, user.password)
         cursor.execute(query, values)
         conn.commit()
 
