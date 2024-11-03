@@ -22,13 +22,11 @@ class Users:
 
 
 class UsersForm(BaseModel):
-
     user_id: int = None
     first_name: str
     last_name: str
     email: str
-    birth_date: date
-    photo_of_profile: UploadFile = None
+    photo_of_profile: str = None
     about: str = None
     password: str 
 
