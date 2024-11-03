@@ -21,7 +21,7 @@ class UserService:
         result = cursor.fetchone()
         if not result:
             return None
-        user = Users(result[1], result[2], result[3], result[4], None, result[0])
+        user = Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
         return user
 
     @staticmethod

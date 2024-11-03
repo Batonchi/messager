@@ -5,6 +5,10 @@ from fastapi.templating import Jinja2Templates
 from app.auth.router import router as auth_router
 from app.users.router import router as user_router
 
+from database import create_database
+
+create_database()
+
 app = FastAPI()
 templates = Jinja2Templates(directory='app/view')
 
@@ -19,7 +23,7 @@ async def exception_handler(request, exc):
     if code == 404:
         return RedirectResponse(url='/error')
     
-    return RedirectResponse(url='/auth/login')
+    return RedirectResponse(url='/login')
 
 
 @app.get('/')
