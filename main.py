@@ -5,15 +5,13 @@ from fastapi.templating import Jinja2Templates
 from app.auth.router import router as auth_router
 from app.users.router import router as user_router
 
-
-
 app = FastAPI()
-
 templates = Jinja2Templates(directory='app/view')
 
 app.include_router(auth_router)
 app.include_router(user_router)
 app.mount('/static', StaticFiles(directory='app/view/static'))
+
 
 @app.exception_handler(HTTPException)
 async def exception_handler(request, exc):
@@ -27,6 +25,7 @@ async def exception_handler(request, exc):
 @app.get('/')
 def main_page(request: Request):
     return templates.TemplateResponse('main.html', {'request': request})
+
 
 @app.get('/error')
 def error(request: Request):

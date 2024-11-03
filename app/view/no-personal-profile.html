@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No your profile</title>
+    <title>NoYour profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC:wght@300;400;700&family=Lilita+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <img src="" alt="конь в пальто" class="background">
+    <img src="/static/images/profile/background.svg" alt="конь в пальто" class="background" oncontextmenu="return false;">
     <section class="forward">
-        <div class="your-profile">Твой профиль</div>
-        <form action="" class="data" method="get">
-            <input type="text" name="first_name" placeholder="Имя" required>
-            <input type="text" name="last_name" placeholder="Фамилия" required>
-            <input type="text" name="email" placeholder="Почта" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-            <input type="date" name="birth_date" placeholder="Дата Рождения" required>
-            <input type="text" name="about" placeholder="О себе" required>
-        </form>
-        <div class="flex_buttons">
-            <div class="photo-of-profile" id="photo-of-profile"><img src="" alt=""></div>
-            <button><a href="">СМЕНИТЬ ФОТО ПРОФИЛЯ</a></и>
-            <button><a href="">ИЗМЕНИТЬ ПАРОЛЬ</a></button>
-            <button><a href="">ОТМЕНИТЬ</a></button>
-            <button><a href="">ПРИНЯТЬ</a></button>
+        <div class="logo"><img src="/static/images/profile/title.svg" alt=""></div>
+        <div class="wild-flex">
+            <form action="" class="data" method="get">
+                <input type="text" name="first_name" placeholder="Имя" readonly>
+                <input type="text" name="last_name" placeholder="Фамилия" readonly>
+                <input type="date" name="birth_date" placeholder="Дата Рождения" readonly>
+                <textarea maxlength="300"  type="text"  class="about" name="about" placeholder="О себе" readonly></textarea>
+            </form>
+            <div class="flex_buttons">
+                <div class="photo-of-profile" id="photo-of-profile">
+                    <img src="" alt="">
+                    <div><a href="">ДРУЗЬЯ</a></div>
+                </div>
+                <button><a href="">ДОБАВИТЬ В ДРУЗЬЯ</a></button>
+                <button><a href="">ВЫЙТИ</a></button>
+            </div>
         </div>
     </section>
+    <style>
+        .photo-of-profile {
+            bottom: 129px !important;
+        }
+        button {
+            height: 60px !important;
+        }
+    </style>
     <link rel="stylesheet" href="/static/css/profile.css">
 </body>
 </html>

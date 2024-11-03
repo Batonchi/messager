@@ -2,12 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 body {
     background-color: rgb(72, 72, 72);
     display: flex;
     justify-content: center;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(170, 150, 99) transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 
 .background {
@@ -19,7 +30,7 @@ body {
 }
 
 .forward{
-    margin-top: 180px;
+    margin-top: 100px;
     z-index: 0;
     position: absolute;
     top: 0px;
@@ -43,25 +54,26 @@ body {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    border: solid 10px rgb(170, 150, 99);
     background-color: rgb(81, 81, 81);
 }
 
 .flex_buttons {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 600px;
-    gap: 10px;
+    gap: 12px;
+    padding-left: 50px;
 }
 
 .flex_buttons button {
-    width: 100%;
+    width: 330px;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    border: solid 10px rgb(170, 150, 99);
+    border: solid 5px rgb(170, 150, 99);
     background-color: rgb(81, 81, 81);
 }
 
@@ -75,8 +87,30 @@ body {
     font-style: normal;
 }
 
+.photo-of-profile {
+    background-color: rgb(71, 71, 71);
+    width: 250px;
+    height: 250px;
+    position: relative;
+    bottom: 130px;
+    left: 35px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-of-profile div a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #927F4E;
+}
+
 .data {
-    padding-top: 50px;
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -84,7 +118,6 @@ body {
     align-items: center;
     gap: 25px;
     width: 620px;
-    border: solid 1px rgb(170, 150, 99);
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -93,19 +126,20 @@ body {
 }
 
 .data input {
-    background-color: rgb(170, 150, 99);
-    width: 534px;
+    background-color: rgb(71, 71, 71);
+    outline: none;
+    width: 450px;
     height: 50px;
-    border-radius: 50px;
+    border-radius: 25px;
     font-size: 28px;
     font-family: "LXGW WenKai Mono TC", monospace;
     font-weight: 400;
     font-style: normal;
     color: white;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
     border: none !important;
     padding-left: 30px;
 }
@@ -114,3 +148,52 @@ body {
     color: white;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator { display: none;}
+
+.wild-flex {
+    display: flex;
+    width: 900px;
+    align-items: flex-start;
+}
+
+.wild-flex .flex_buttons {
+    align-self: flex-end;
+    position: relative;
+    bottom: 52px;
+}
+
+.wild-flex .about {
+    height: max-content;
+    min-height: 300px;
+    text-wrap: wrap;
+    background-color: rgb(71, 71, 71);
+    outline: none;
+    width: 450px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 28px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    border: none !important;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-right: 25px;
+}
+
+.wild-flex .about::placeholder {
+    color: white;
+}
+
+.wild-flex .about:focus {
+    padding-top: 10px;
+}
+
+textarea {
+    resize: none;
+}

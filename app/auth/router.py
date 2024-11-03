@@ -22,7 +22,7 @@ async def registration(user_form: UsersForm):
     user = Users(user_form.first_name, user_form.last_name, user_form.email, user_form.birth_date,
                  photo_of_profile=photo_uuid,
                  password=hash_password(user_form.password))
-    path = os.path.join('app/view/static/avatars', f'{photo_uuid}.png')
+    path = os.path.join('app/view/static/avatars/', f'{photo_uuid}.png')
     if user_form.photo_of_profile:
         with open(path, 'wb') as img:
             img.write(await user_form.photo_of_profile.read())
@@ -53,6 +53,7 @@ async def registration_page(request: Request):
 @router.get('/login')
 async def login_page(request: Request):
     return templates.TemplateResponse('login.html', {'request': request})
+
 
 @router.get('/logout')
 async def logout_page(response: Response):

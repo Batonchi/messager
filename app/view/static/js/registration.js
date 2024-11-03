@@ -19,7 +19,7 @@ document.getElementById('button_form').addEventListener('click', async (event) =
     }
     response = await fetch('/registration', {
         method: "POST",
-        body: JSON.stringify(user)
+        body: formData
     })
     if (response.status == 409) {
         alert("Такой пользователь уже зарегистрирован!")
