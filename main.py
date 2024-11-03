@@ -30,3 +30,5 @@ def main_page(request: Request):
 @app.get('/error')
 def error(request: Request):
     return templates.TemplateResponse('error.html', {'request': request})
+
+

@@ -26,7 +26,8 @@ class UsersForm(BaseModel):
     first_name: str
     last_name: str
     email: str
-    photo_of_profile: str = None
+    birth_date: date
+    photo_of_profile: UploadFile = None
     about: str = None
     password: str 
 
