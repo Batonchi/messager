@@ -14,8 +14,12 @@ templates = Jinja2Templates(directory='app/view')
 
 
 @router.get("/profile")
-async def profile(request: Request, user=Depends(get_user_by_token), id: int = None):
+async def profile(request: Request, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("profile.html", {"request": request})
+
+@router.get("/profile/{id}")
+async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
+    return templates.TemplateResponse("no-personal-profile.html", {"request": request})
 
 
 @router.get("/user")
