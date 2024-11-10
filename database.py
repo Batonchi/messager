@@ -13,6 +13,7 @@ def get_connection():
     cursor = conn.cursor()
     return conn, cursor
 
+
 def create_database():
     conn, cursor = get_connection()
     query = """

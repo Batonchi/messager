@@ -38,7 +38,7 @@ class UserService:
         results = cursor.fetchall()
         users = [Users(result[1], result[2], result[3], result[4], None, result[0]) for result in results]
         return users
-
+        
 
 class FriendService:
     @staticmethod
