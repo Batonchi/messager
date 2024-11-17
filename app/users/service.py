@@ -31,7 +31,7 @@ class UserService:
         values = []
         query = 'select * from users where '
         for word in search_words:
-            query += '(firs_name ILIKE %s or last_name ILIKE %s) or '
+            query += '(first_name ILIKE %s or last_name ILIKE %s) or '
             values.extend([word, word])
         query = query[: -3]
         cursor.execute(query, values)

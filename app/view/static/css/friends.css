@@ -2,3 +2,266 @@
     margin: 0;
     padding: 0;
 }
+*::-webkit-scrollbar {
+    background: none;
+    width: 5px;
+}
+*::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    background-color: white;
+}
+body {
+    background-color: rgb(228, 219, 196);
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-style: normal;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+}
+h2 {
+    font-size: 32px;
+    font-family: inherit;
+    font-weight: inherit;
+}
+.main-scroll-container {
+    border: solid 10px #AA9663;
+    width: 2143px;
+    min-height: 1000px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    min-width: 2143px;
+    height: 1000px;
+    margin-top: 100px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.main-scroll-container section {
+    background-color: rgb(71, 71, 71);
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.background {
+    background-color: rgb(81, 81, 81) !important;
+    width: 2050px;
+    min-height: 980px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    min-width: 2000px;
+    height: 900px;
+    position: absolute;
+    z-index: -1;
+    top: 120px;
+    margin-left: 45px;
+    margin-top: 2px;
+}
+/* Sectionn your friend start */
+.your-friends {
+    background: none !important;
+    width: 364px;
+    height: 928px;
+    margin-top: 35px;
+    margin-left: 60px;
+}
+.your-profile-btn {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.exit-btn {
+    background-color: rgb(72, 72, 72);
+    border: solid 5px rgb(72, 72, 72);
+    width: 155px;
+    height: 56px;
+    font-size: 36px;
+    position: relative;
+    left: 30px;
+    bottom: 5px;
+    font-family: inherit;
+    font-weight: inherit;
+    color: inherit;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+}
+.header {
+    display: flex;
+    width: 258px;
+    justify-content: space-between;
+    margin-left: 30px;
+    padding-bottom: 15px;
+}
+.your-friends .header-2 {
+    width: 341px;
+    height: 67px;
+    border: solid 5px rgb(72, 72, 72);
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.your-friends .scroll-container{
+    width: 364px;
+    height: 700px;
+    min-height: 700px;
+    min-width: 264px;
+    overflow-y: scroll;
+    scrollbar-width: 3px;
+    margin-top: 30px;
+}
+.your-friends .scroll-elem {
+    min-width: 346px;
+    min-height: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+.your-friends .scroll-elem .image-box {
+    background-color: rgb(72, 72, 72);
+    width: 74px;
+    height: 75px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+.your-friends .scroll-elem .content {
+    background-color: rgb(72, 72, 72);
+    width: 244px;
+    height: 75px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+/* Sectionn your friend end */
+/* section search-friends start */
+.search-friends {
+    background: none !important;
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-friends h1 {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 64px;
+}
+.search-friends h1 s {
+    color: #AA9663;
+}
+.search-friends p {
+    width: 361px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: inherit;
+}
+.search-friends .search {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    position: relative;
+    right: 70px;
+    top: 5px;
+}
+.search-friends input[type="text"] {
+    color: white;
+    font-size: 32px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    width: 631px;
+    height: 90px;
+    border-radius: 50px;
+    background-color: rgb(81, 81, 81);
+    outline: none;
+    border: none;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.search-friends form {
+    margin-top: 70px;
+    position: relative;
+    left: 26px;
+}
+.search-friends input[type="text"]::placeholder {
+    border-radius: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border: solid 5px rgb(72, 72, 72);
+    color: white;
+    font-size: 32px;
+    font-weight: inherit;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.search-friends input[type="text"]:focus {
+    border-radius: 50px;
+    color: white;
+    font-family: inherit;
+    font-size: 32px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.search-friends .scroll-container {
+    width: 631px;
+    height: 650px;
+    z-index: -1;
+    background-color: rgb(72, 72, 72);
+    position: relative;
+    bottom: 70px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+/* section search-friends end */
+/* section responses start */
+/* section responses end */

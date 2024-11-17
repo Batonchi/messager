@@ -31,3 +31,9 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 async def search(request: Request, search_str: str):
     users = UserService.find_by_any(search_str)
     return users
+
+
+@router.get('/friends')
+async def friends(request: Request, user=Depends(get_user_by_token)):
+    return templates.TemplateResponse("friends.html", {"request": request})
+
