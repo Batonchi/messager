@@ -1,8 +1,12 @@
+import json
+
+
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from app.auth.service import get_user_by_token
 from app.users.service import UserService
+from database import rcache
 
 
 router = APIRouter(
@@ -29,7 +33,10 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 
 @router.get("/search")
 async def search(request: Request, search_str: str):
+    if rcache.get(search_str):
+        return json.loads(rcache.get(search_str))
     users = UserService.find_by_any(search_str)
+    rcache.set(search_str, json.dumps(users))
     return users
 
 

@@ -5,16 +5,16 @@ from database import get_connection
 class PrivateMessagesService:
 
     @staticmethod
-    def save(message: PrivateMessages):
+    def save(sender_id, recipient_id, text_message):
         conn, cursor = get_connection()
         query = ('insert into private_message '
                  '(sender_id, recipient_id, text_message) values (%s, %s, %s)')
-        values = (message.sender_id, message.recipient_id, message.text_message)
+        values = (sender_id, recipient_id, text_message)
         cursor.execute(query, values)
         conn.commit()
 
     @staticmethod
-    def find_chat(user1_id: str, user2_id: str):
+    def find_chat(user1_id: int, user2_id: int):
         conn, cursor = get_connection()
         query = 'select * from where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
         values = (user1_id, user2_id, user2_id, user1_id)

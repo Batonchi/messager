@@ -4,8 +4,8 @@ from starlette.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from app.auth.router import router as auth_router
 from app.users.router import router as user_router
-
-from database import create_database
+from app.messages.router import router as messages_router
+from database import create_database, rcache
 
 create_database()
 
@@ -14,6 +14,7 @@ templates = Jinja2Templates(directory='app/view')
 
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(messages_router)
 app.mount('/static', StaticFiles(directory='app/view/static'))
 
 
@@ -35,4 +36,22 @@ def main_page(request: Request):
 def error(request: Request):
     return templates.TemplateResponse('error.html', {'request': request})
 
+
+# alist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#
+#
+# @app.get('/test/{id}')
+# def test(request: Request, id: int):
+#     alist.append(id)
+#     rcache.flushdb()
+#
+# @app.get('/test-list')
+# def test_list(request: Request):
+#     import json, time
+#     global alist
+#     if rcache.get('alist'):
+#         return json.loads(rcache.get('alist'))
+#     time.sleep(10)
+#     rcache.set('alist', json.dumps(alist))
+#     return alist
 

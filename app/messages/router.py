@@ -1,24 +1,33 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Depends
+from app.messages.service import PrivateMessagesService
+from app.auth.service import get_user_by_token
 
 
 router = APIRouter(
     prefix="/chat", tags=['chat']
 )
 
-@router.post('')
-def chat():
+
+@router.get('')
+async def chat_page(request: Request, user=Depends(get_user_by_token)):
     pass
+
+
+@router.get('/get')
+async def request(request: Request,  user2_id: int, user=Depends(get_user_by_token)):
+    return PrivateMessagesService.find_chat(user.user_id, user2_id)
+
 
 @router.post('/messages/add')
-def messages_add():
-    pass
+async def messages_add(request: Request, text_message: str, recipient_id: int, user=Depends(get_user_by_token)):
+    PrivateMessagesService.save(user.user_id, recipient_id, text_message)
 
 
-@router.post('/messages/delete')
-def messages_delete():
+@router.delete('/messages/delete')
+async def messages_delete():
     pass
 
 
 @router.post('/messages/edit')
-def messages_edit():
+async def messages_edit():
     pass
