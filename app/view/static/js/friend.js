@@ -11,14 +11,29 @@ async function get_users(e) {
         var users_div = document.getElementById('users')
         users.innerHTML = ''
         console.log(users)
-        for (user of users) {
-            console.log(user)
+        for (const user of users) {
             var div = document.createElement('div')
+            div.innerHTML = `
+                <div>
+                    <img src="/static/avatars/${user.photo_of_profile}.png" alt="">
+                    <div>
+                        <span>ФАМИЛИЯ: ${user.last_name}</span>
+                        <span>ИМЯ: ${user.first_name}</span>
+                    </div>
+                    <button onclick="addFriends(${user.user_id})">Добавить в друзья</button>
+                </div>
+            `
             users_div.appendChild(div)
-// `<img src="" alt=""><p>ИМЯ: ${user.first_name}</p><p>ФАМИЛИЯ: ${user.last_name}</p>`
+            
         }
     })
 
 }
 
 document.getElementById('search-form').addEventListener('submit', get_users)
+
+
+
+async function addFriends(userId) {
+    
+} 
