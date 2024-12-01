@@ -1,4 +1,4 @@
-import json
+import pickle
 
 
 from fastapi import APIRouter, Request, Depends
@@ -34,13 +34,30 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 @router.get("/search")
 async def search(request: Request, search_str: str):
     if rcache.get(search_str):
-        return json.loads(rcache.get(search_str))
+        return pickle.loads(rcache.get(search_str))
     users = UserService.find_by_any(search_str)
-    rcache.set(search_str, json.dumps(users))
+    rcache.set(search_str, pickle.dumps(users))
     return users
 
 
 @router.get('/friends')
 async def friends(request: Request, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("friends.html", {"request": request})
+
+
+@router.post("/friend/add")
+async def add_friend(request: Request, user=Depends(get_user_by_token)):
+    pass
+
+
+@router.post("/friend/remove")
+async def remove_friend(request: Request, user=Depends(get_user_by_token)):
+    pass
+
+
+@router.post("/friend/list")
+async def list_friends(request: Request, user=Depends(get_user_by_token)):
+    pass
+
+
 

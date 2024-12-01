@@ -1,5 +1,6 @@
 from fastapi import UploadFile
 from pydantic import BaseModel
+from typing import Optional
 from datetime import date
 
 
@@ -22,13 +23,13 @@ class Users:
 
 
 class UsersForm(BaseModel):
-    user_id: int = None
+    user_id: Optional[int] = None
     first_name: str
     last_name: str
     email: str
     birth_date: date
-    photo_of_profile: UploadFile = None
-    about: str = None
+    photo_of_profile: Optional[UploadFile] = None
+    about: Optional[str] = None
     password: str 
 
 

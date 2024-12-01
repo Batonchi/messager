@@ -9,9 +9,8 @@ router = APIRouter(
 
 
 @router.get('')
-async def chat_page(request: Request, user=Depends(get_user_by_token)):
+async def chats_page(request: Request, user=Depends(get_user_by_token)):
     pass
-
 
 @router.get('/get')
 async def request(request: Request,  user2_id: int, user=Depends(get_user_by_token)):

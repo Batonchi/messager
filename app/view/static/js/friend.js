@@ -1,6 +1,6 @@
 async function get_users(e) {
     e.preventDefault()
-    const search = document.getElementById('search').value
+    const search = document.getElementById('input_str').value
     if (search === ''){
         return
     }
@@ -15,13 +15,10 @@ async function get_users(e) {
             console.log(user)
             var div = document.createElement('div')
             users_div.appendChild(div)
-            div.insertAdjacentElement('beforebegin', '<img src="" alt="">')
-            div.insertAdjacentElement('beforebegin', `<p>ИМЯ: ${user.first_name}</p>`)
-            div.insertAdjacentElement('beforebegin', `<p>ФАМИЛИЯ: ${user.last_name}</p>`)
-
+// `<img src="" alt=""><p>ИМЯ: ${user.first_name}</p><p>ФАМИЛИЯ: ${user.last_name}</p>`
         }
     })
 
 }
 
-document.getElementById('search_btn').addEventListener('click', get_users)
+document.getElementById('search-form').addEventListener('submit', get_users)

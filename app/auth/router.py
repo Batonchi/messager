@@ -19,10 +19,12 @@ templates = Jinja2Templates(directory='app/view')
 @router.post('/registration')
 async def registration(user_form: UsersForm):
     photo_uuid = uuid.uuid4()
+    print(photo_uuid)
     user = Users(user_form.first_name, user_form.last_name, user_form.email, user_form.birth_date,
                  photo_of_profile=photo_uuid,
                  password=hash_password(user_form.password))
     path = os.path.join('app/view/static/avatars/', f'{photo_uuid}.png')
+    print(path)
     if user_form.photo_of_profile:
         with open(path, 'wb') as img:
             img.write(await user_form.photo_of_profile.read())
