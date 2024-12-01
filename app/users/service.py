@@ -27,15 +27,17 @@ class UserService:
         return user
 
     @staticmethod
-    def find_by_any(search):
+    def find_by_any(search, user_Id):
         conn, cursor = get_connection()
         search_words = search.split()
         values = []
-        query = 'select * from users where '
+        query = 'select * from users join friends friends.user_id = users.user_id on where ('
         for word in search_words:
             query += '(first_name ILIKE %s or last_name ILIKE %s) or '
-            values.extend([word, word])
+            values.extend(['%' + word + '%', '%' + word + '%'])
         query = query[: -3]
+        query += ") AND users.user_id != %s AND users.user_id != friends.user_id"
+        values.extend([user_Id])
         cursor.execute(query, values)
         results = cursor.fetchall()
         users = [Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])

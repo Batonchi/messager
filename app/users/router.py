@@ -32,10 +32,10 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 
 
 @router.get("/search")
-async def search(request: Request, search_str: str):
+async def search(request: Request, search_str: str, user=Depends(get_user_by_token)):
     if rcache.get(search_str):
         return pickle.loads(rcache.get(search_str))
-    users = UserService.find_by_any(search_str)
+    users = UserService.find_by_any(search_str, user.user_id)
     rcache.set(search_str, pickle.dumps(users))
     return users
 
