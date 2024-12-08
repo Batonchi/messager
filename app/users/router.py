@@ -1,12 +1,15 @@
 import pickle
+import os
 
 
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, UploadFile
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from typing import Optional
 from app.auth.service import get_user_by_token
 from app.users.service import UserService, FriendService
 from database import rcache
+
 
 
 router = APIRouter(
@@ -30,6 +33,16 @@ async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
 async def user(request: Request, user=Depends(get_user_by_token)):
     return user
 
+@router.post('/update-data')
+async def user_data(request: Request, user=Depends(get_user_by_token)):
+    pass
+
+@router.post('/update-avatar')
+async def user_avatar(request: Request, photo_of_profile: Optional[UploadFile], user=Depends(get_user_by_token)):
+    path = os.path.join('app/view/static/avatars/', f'{user.photo_of_profile}.png')
+    with open(path, 'wb') as img:
+            img.write(await photo_of_profile.read())
+    
 
 @router.get("/search")
 async def search(request: Request, search_str: str, user=Depends(get_user_by_token)):

@@ -1,9 +1,3 @@
-from fastapi import UploadFile
-from pydantic import BaseModel
-from typing import Optional
-from datetime import date
-
-
 class Users:
 
     def __init__(self, first_name, last_name,  email, birth_date, photo_of_profile=None, about=None, password=None,
@@ -20,17 +14,6 @@ class Users:
             self.about = about
         if password:
             self.password = password
-
-
-class UsersForm(BaseModel):
-    user_id: Optional[int] = None
-    first_name: str
-    last_name: str
-    email: str
-    birth_date: date
-    photo_of_profile: Optional[UploadFile] = None
-    about: Optional[str] = None
-    password: str 
 
 
 class Friends:
