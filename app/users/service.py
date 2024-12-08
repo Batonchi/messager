@@ -31,13 +31,14 @@ class UserService:
         conn, cursor = get_connection()
         search_words = search.split()
         values = []
-        query = 'select * from users join friends friends.user_id = users.user_id on where ('
+        query = 'select * from users left join friends on friends.user_id = users.user_id where'
         for word in search_words:
             query += '(first_name ILIKE %s or last_name ILIKE %s) or '
             values.extend(['%' + word + '%', '%' + word + '%'])
         query = query[: -3]
-        query += ") AND users.user_id != %s AND users.user_id != friends.user_id"
-        values.extend([user_Id])
+        # query += ") AND users.user_id != %s AND users.user_id != friends.friend"
+        # values.extend([user_Id])
+        print(query)
         cursor.execute(query, values)
         results = cursor.fetchall()
         users = [Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
@@ -49,7 +50,7 @@ class FriendService:
     @staticmethod
     def save(user_id: int, friend_id: int):
         conn, cursor = get_connection()
-        query = 'insert into friends (user_id, friend_id) values (%s, %s)'
+        query = 'insert into friends (user_id, friend_id) values (%s, %s) on conflict (user_id, friend_id) do nothing'
         values = (user_id, friend_id)
         cursor.execute(query, values)
         conn.commit()

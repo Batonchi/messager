@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from app.auth.service import get_user_by_token
-from app.users.service import UserService
+from app.users.service import UserService, FriendService
 from database import rcache
 
 
@@ -33,10 +33,10 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 
 @router.get("/search")
 async def search(request: Request, search_str: str, user=Depends(get_user_by_token)):
-    if rcache.get(search_str):
-        return pickle.loads(rcache.get(search_str))
+    # if rcache.get(search_str):
+    #     return pickle.loads(rcache.get(search_str))
     users = UserService.find_by_any(search_str, user.user_id)
-    rcache.set(search_str, pickle.dumps(users))
+    # rcache.set(search_str, pickle.dumps(users))
     return users
 
 
@@ -46,8 +46,9 @@ async def friends(request: Request, user=Depends(get_user_by_token)):
 
 
 @router.post("/friend/add")
-async def add_friend(request: Request, user=Depends(get_user_by_token)):
-    pass
+async def add_friend(request: Request, friend_id: int, user=Depends(get_user_by_token)):
+    FriendService.save(user.id, friend_id)
+    FriendService.save(friend_id, user.id)
 
 
 @router.post("/friend/remove")
