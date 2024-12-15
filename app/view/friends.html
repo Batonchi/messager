@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC:wght@300;400;700&family=Lilita+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="main-scroll-container">
+        <section class="background"></section>
+        <section class="your-friends">
+            <div class="header">
+                <button class="your-profile-btn">
+                    <img src="/static/images/friends/circle-user.svg" alt="">
+                </button>
+                <button class="exit-btn" onclick="location.href = '/profile'">выйти</button>
+            </div>
+            <div class="header-2">
+                <h2>ДРУЗЬЯ</h2>
+            </div>
+            <div class="scroll-container" id="friends">
+                <div class="scroll-elem">
+                    <div class="image-box"><img src="" alt=""></div>
+                    <div class="content"></div>
+                </div>
+            </div>
+        </section>
+        <section class="search-friends">
+            <h1> ТВОИ<s> ПОЧТИ</s> ДРУЗЬЯ</h1>
+            <p>-ЕСЛИ ТЕБЕ КАЖЕТСЯ, ЧТО У ТЕБЯ ЕСТЬ ДРУЗЬЯ</p>
+            <p>-ПОВЕРЬ ТЕБЕ ПРОСТО КАЖЕТСЯ</p>
+            <form action="" class="" method="get" id="search-form">
+                <input type="text" id="input_str" name="search-friends" placeholder="ПОИСК">
+                <button class="search" id="search_btn"><img src="/static/images/friends/search.svg" alt=""></button>
+            </form>
+            <div class="scroll-container" id="users">
+                <div class="scroll-elem">
+                    <div class="image-box"><img src="" alt=""></div>
+                    <div class="content"></div>
+                </div>
+            </div>
+        </section>
+        <section class="recipient">
+            <div class="back-h2"><h2>ЗАПРОСЫ В ДРУЗЬЯ</h2></div>
+            <div class="scroll-container" id="in-your">
+                <div class="scroll-elem"></div>
+            </div>
+        </section>
+        <section class="sender">
+            <div class="back-h2"><h2>ТВОИ ЗАПРОСЫ В ДРУЗЬЯ</h2></div>
+            <div class="scroll-container" id="from-your">
+                <div class="scroll-elem"></div>
+            </div>
+        </section>
+    </section>
+    <link rel="stylesheet" href="/static/css/friends.css">
+    <script src="/static/js/friend.js"></script>
+</body>
+</html>
