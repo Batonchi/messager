@@ -8,6 +8,7 @@ async function get_user() {
         user_form.first_name.value = user.first_name
         user_form.last_name.value = user.last_name
         user_form.birth_date.value = user.birth_date
+        document.getElementById('photo-of-profile').src = `/static/avatars/${user.photo_of_profile}.png`
     })
 }
 
@@ -15,30 +16,16 @@ document.addEventListener('DOMContentLoaded',  async () => {
     await get_user()
 })
 
-// document.getElementById('button_form').addEventListener('click', async (event) => {
-//     event.preventDefault()
-//
-//     const reg_form = document.getElementById('registration')
-//
-//     if (reg_form.password.value !== reg_form.repeat_password.value) {
-//         alert("Пвроли не совпадают!")
-//         return
-//     }
-//     const formData = new FormData()
-//     formData.append('first_name', reg_form.first_name.value)
-//     formData.append('last_name', reg_form.last_name.value)
-//     formData.append('email', reg_form.email.value)
-//     formData.append('birth_date', reg_form.birth_date.value)
-//     formData.append('password', reg_form.password.value)
-//     response = await fetch('/registration', {
-//         method: "POST",
-//         body: formData}).then((response) => {
-//             window.location.href = ''
-//     }, (response) => {
-//             if (response.status != 200) {
-//                 alert("Ой! Что то пошло не так :(")
-//                 return
-//             }
-//     })
-//     // window.location.href="/login"
-// })
+async function update_avatar(event) {
+    const file = event.target.files[0]
+    const formData = new FormData()
+    formData.append("photo_of_profile", file)
+    response = await fetch('/users/update-avatar', {method: 'POST', body: formData})
+    if (response.ok) {
+        location.reload()
+    }
+}
+
+async function update_profile() {
+    return
+}

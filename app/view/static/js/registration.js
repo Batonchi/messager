@@ -8,9 +8,7 @@ document.getElementById('button_form').addEventListener('click', async (event) =
         return
     }
 
-    response = await fetch(`/registration?first_name=${reg_form.first_name.value}&last_name=${reg_form.last_name.value}&
-        email=${reg_form.email.value}&birth_date=${reg_form.birth_date.value}&
-        password=${reg_form.password.value}&`, {
+    response = await fetch(`/registration?first_name=${reg_form.first_name.value}&last_name=${reg_form.last_name.value}&email=${reg_form.email.value}&birth_date=${reg_form.birth_date.value}&password=${reg_form.password.value}`, {
         method: "POST",
     })
     if (response.status == 409) {

@@ -8,11 +8,11 @@ async function get_users(e) {
             return response.json()
         }
     ).then((users) => {
-        var users_div = document.getElementById('users')
-        users.innerHTML = ''
-        console.log(users)
+        const users_div = document.getElementById('users')
+        users_div.innerHTML = ''
         for (const user of users) {
-            var div = document.createElement('div')
+            const div = document.createElement('div')
+            div.className = 'scroll-elem'
             div.innerHTML = `
                 <img src="/static/avatars/${user.photo_of_profile}.png" alt="">
                 <div>
@@ -29,7 +29,24 @@ async function get_users(e) {
 
 document.getElementById('search-form').addEventListener('submit', get_users)
 
-
+document.addEventListener('DOMContentLoaded',  async () => {
+    await fetch('usr/friend/list').then(response => {
+        return response.json()
+    }).then((users) => {
+        const friends = document.getElementById('friends')
+        for (const user of users) {
+            friends.insertAdjacentHTML('beforeend', `<div class="scroll-container" id="users">
+                                <div class="scroll-elem">
+                                    <div class="image-box"><img src="/static/avatars/${user.photo_of_profile}.png" alt=""></div>
+                                    <div class="content">
+                                        <span>ФАМИЛИЯ: ${user.last_name}</span>
+                                        <span>ИМЯ: ${user.first_name}</span>
+                                    </div>
+                                </div>
+                           </div>`)
+        }
+    })
+})
 
 async function addFriends(userId) {
     await fetch(`/users/friend/add?friend_id=${userId}`, {method: 'post'})

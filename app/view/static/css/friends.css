@@ -270,6 +270,14 @@ h2 {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
+    padding-top: 50px;
+    overflow-y: scroll;
+}
+.search-friends .scroll-elem {
+    min-width: 346px;
+    min-height: 75px;
+    display: flex;
+    justify-content: space-between;
 }
 /* section search-friends end */
 /* section responses start */

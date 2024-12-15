@@ -31,13 +31,13 @@ class UserService:
         conn, cursor = get_connection()
         search_words = search.split()
         values = []
-        query = 'select * from users left join friends on friends.user_id = users.user_id where'
+        query = 'select * from users left join friends on friends.user_id = users.user_id where ('
         for word in search_words:
             query += '(first_name ILIKE %s or last_name ILIKE %s) or '
             values.extend(['%' + word + '%', '%' + word + '%'])
         query = query[: -3]
-        # query += ") AND users.user_id != %s AND users.user_id != friends.friend"
-        # values.extend([user_Id])
+        query += ") AND users.user_id != %s"
+        values.extend([user_Id])
         print(query)
         cursor.execute(query, values)
         results = cursor.fetchall()
@@ -59,7 +59,7 @@ class FriendService:
     def find_all(user_id: int):
         conn, cursor = get_connection()
         query = 'select * from friends where user_id=%s'
-        values = (user_id)
+        values = (user_id,)
         cursor.execute(query, values)
 
     @staticmethod

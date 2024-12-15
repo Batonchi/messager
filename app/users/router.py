@@ -38,10 +38,10 @@ async def user_data(request: Request, user=Depends(get_user_by_token)):
     pass
 
 @router.post('/update-avatar')
-async def user_avatar(request: Request, photo_of_profile: Optional[UploadFile], user=Depends(get_user_by_token)):
+async def user_avatar(request: Request, photo_of_profile: UploadFile, user=Depends(get_user_by_token)):
     path = os.path.join('app/view/static/avatars/', f'{user.photo_of_profile}.png')
     with open(path, 'wb') as img:
-            img.write(await photo_of_profile.read())
+        img.write(await photo_of_profile.read())
     
 
 @router.get("/search")
@@ -71,7 +71,7 @@ async def remove_friend(request: Request, user=Depends(get_user_by_token)):
 
 @router.post("/friend/list")
 async def list_friends(request: Request, user=Depends(get_user_by_token)):
-    pass
+    return FriendService.find_all(user.user_id)
 
 
 

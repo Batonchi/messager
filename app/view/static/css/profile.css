@@ -75,6 +75,7 @@ body::-webkit-scrollbar-thumb {
     -o-border-radius: 50px;
     border: solid 5px rgb(170, 150, 99);
     background-color: rgb(81, 81, 81);
+    cursor: pointer;
 }
 
 .flex_buttons button a {
@@ -87,6 +88,16 @@ body::-webkit-scrollbar-thumb {
     font-style: normal;
 }
 
+#photo-of-profile {
+    background-color: rgb(71, 71, 71);
+    width: 250px;
+    height: 250px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
 .photo-of-profile {
     background-color: rgb(71, 71, 71);
     width: 250px;
@@ -196,4 +207,29 @@ input[type="date"]::-webkit-calendar-picker-indicator { display: none;}
 
 textarea {
     resize: none;
+}
+
+.wild-flex #button_form {
+    height: 43px;
+    color: white !important;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.wild-flex input[type="file"] {
+    display: block;
+}
+
+#file_input {
+    height: 43px;
+    color: white !important;
+    font-size: 28px;
+    font-family: "LXGW WenKai Mono TC", monospace;
+    border: solid 5px rgb(170, 150, 99);
+    border-radius: 50px;
+    width: 329px;
+    display: inline-flex;
+    justify-content: center;
+    cursor: pointer;
 }

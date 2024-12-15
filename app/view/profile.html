@@ -21,11 +21,14 @@
                 <textarea maxlength="300"  type="text"  class="about" name="about" placeholder="О себе" required></textarea>
             </form>
             <div class="flex_buttons">
-                <div class="photo-of-profile" id="photo-of-profile">
-                    <img src="" alt="">
+                <div class="photo-of-profile">
+                    <img src="" alt="" id="photo-of-profile">
                     <div><a href="/users/friends">ДРУЗЬЯ</a></div>
                 </div>
-                <button><a href="">СМЕНИТЬ ФОТО ПРОФИЛЯ</a></button>
+                <div id="file_input">
+                    <input type="file" name="photo_of_profile" id="file_selector" onchange="update_avatar(event)" style="display: none">
+                    <label onclick="document.getElementById('file_selector').click()" style="cursor: pointer">СМЕНИТЬ ФОТО ПРОФИЛЯ</label>
+                </div>
                 <button><a href="">ИЗМЕНИТЬ ПАРОЛЬ</a></button>
                 <button><a href="">ОТМЕНИТЬ</a></button>
                 <button id="button_form" form="user_form">ПРИНЯТЬ</button>
