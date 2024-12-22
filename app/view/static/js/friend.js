@@ -10,18 +10,17 @@ async function get_users(e) {
     ).then((users) => {
         const users_div = document.getElementById('users')
         users_div.innerHTML = ''
+        console.log(users)
         for (const user of users) {
-            const div = document.createElement('div')
-            div.className = 'scroll-elem'
-            div.innerHTML = `
-                <img src="/static/avatars/${user.photo_of_profile}.png" alt="">
-                <div>
-                     <span>ФАМИЛИЯ: ${user.last_name}</span>
-                    <span>ИМЯ: ${user.first_name}</span>
+            users_div.insertAdjacentHTML('beforeend', `
+                <div class="scroll-elem">
+                    <div class="image-box" style="background-image: url(/static/avatars/${user.photo_of_profile}.png);" onclick=""></div>
+                    <div class="content">
+                        <span>ФАМИЛИЯ: ${user.last_name}</span>
+                        <span>ИМЯ: ${user.first_name}</span>
                     </div>
-                    <button onclick="addFriends(${user.user_id})" style="width: 300px; height: 100px; z-index: 1;">Добавить в друзья</button>
-            `
-            users_div.appendChild(div)
+                    <button onclick="alert('tam')" style="background: none; background-color: rgb(71, 71, 71); width: 200px; height: 100px; outline: none; font-family: inherit; font-size: 28px; color: white; cursor: pointer;">Добавить</button>
+                </div>`)
         }
     })
 }
@@ -30,24 +29,27 @@ async function get_users(e) {
 document.getElementById('search-form').addEventListener('submit', get_users)
 
 document.addEventListener('DOMContentLoaded',  async () => {
-    await fetch('usr/friend/list').then(response => {
+    await fetch('/users/friend/list').then(response => {
         return response.json()
     }).then((users) => {
         const friends = document.getElementById('friends')
         for (const user of users) {
-            friends.insertAdjacentHTML('beforeend', `<div class="scroll-container" id="users">
-                                <div class="scroll-elem">
-                                    <div class="image-box"><img src="/static/avatars/${user.photo_of_profile}.png" alt=""></div>
+            friends.insertAdjacentHTML('beforeend', `
+                                <div class="scroll-elem" onclick="openProfile(${user.user_id})">
+                                    <div class="image-box" style="background-image: url(/static/avatars/${user.photo_of_profile}.png);"></div>
                                     <div class="content">
                                         <span>ФАМИЛИЯ: ${user.last_name}</span>
                                         <span>ИМЯ: ${user.first_name}</span>
                                     </div>
-                                </div>
-                           </div>`)
+                                </div>`)
         }
     })
 })
 
 async function addFriends(userId) {
     await fetch(`/users/friend/add?friend_id=${userId}`, {method: 'post'})
+}
+
+async function openProfile(userId) {
+    window.location.href = `/users/profile/${userId}`, {method: 'get'}
 }

@@ -62,4 +62,5 @@ def create_database():
     """
     cursor.execute(query)
     conn.commit()
+create_database()
     

@@ -58,9 +58,16 @@ class FriendService:
     @staticmethod
     def find_all(user_id: int):
         conn, cursor = get_connection()
-        query = 'select * from friends where user_id=%s'
+        query = '''select users.user_id, first_name, last_name, email, users.birth_date, photo_of_profile from friends  
+                    join users on friends.friend_id = users.user_id
+                    where friends.user_id = %s'''
         values = (user_id,)
         cursor.execute(query, values)
+        results = cursor.fetchall()
+        users = [Users(result[1], result[2], result[3], result[4], result[5], user_id=result[0])
+                 for result in results]
+        return users
+        
 
     @staticmethod
     def delete(user_id: int, friend_id: int):

@@ -69,7 +69,7 @@ async def remove_friend(request: Request, user=Depends(get_user_by_token)):
     pass
 
 
-@router.post("/friend/list")
+@router.get("/friend/list")
 async def list_friends(request: Request, user=Depends(get_user_by_token)):
     return FriendService.find_all(user.user_id)
 
