@@ -1,6 +1,6 @@
 from app.messages.model import PrivateMessages, GroupMessages
 from database import get_connection
-
+from fastapi import WebSocket
 
 class PrivateMessagesService:
 
@@ -35,3 +35,27 @@ class GroupMassagesService:
         values = (message.sender_id, message.date_sending, message.text_message)
         cursor.execute(query, values)
         conn.commit()
+
+
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: dict[int, WebSocket] = {}
+
+    async def connect(self, websocket: WebSocket, user_id: int):
+        await websocket.accept()
+        self.active_connections[user_id] = websocket
+
+    async def disconnect(self, user_id: int):
+        if user_id in self.active_connections:
+            del self.active_connections[user_id]
+
+    async def send_message(self, sender_id: int, recipient_id: int):
+        websocket = self.active_connections.get(recipient_id)
+        if websocket:
+            await websocket.send_text(str(sender_id))
+        websocket = self.active_connections.get(sender_id)
+        if websocket:
+            await websocket.send_text(str(recipient_id))
+
+con_manager = ConnectionManager()

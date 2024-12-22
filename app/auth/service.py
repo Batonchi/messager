@@ -29,4 +29,4 @@ def get_user_by_token(request: Request):
     if not user:
         raise HTTPException(status_code=409, detail="Пользователь не найден! Неверный логин или пароль!")
     return user
-
+    
