@@ -1,4 +1,5 @@
 from app.messages.model import PrivateMessages, GroupMessages
+from app.users.model import Users
 from database import get_connection
 from fastapi import WebSocket
 
@@ -16,7 +17,7 @@ class PrivateMessagesService:
     @staticmethod
     def find_chat(user1_id: int, user2_id: int):
         conn, cursor = get_connection()
-        query = 'select * from where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
+        query = 'select * from messages where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
         values = (user1_id, user2_id, user2_id, user1_id)
         cursor.execute(query, values)
         results = cursor.fetchall()
@@ -25,6 +26,20 @@ class PrivateMessagesService:
             return messages
         messages = [PrivateMessages(result[1], result[2], result[3], result[4], result[0]) for result in results]
         return messages
+
+    @staticmethod
+    def get_all_chats(user_id: int):
+        conn, cursor = get_connection()
+        query = '''SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.email, u.birth_date, u.photo_of_profile
+FROM private_messages pm
+JOIN users u ON (pm.sender_id = u.user_id OR pm.recipient_id = u.user_id)
+WHERE (pm.sender_id = %s OR pm.recipient_id = %s) AND u.user_id != %s'''
+        values = (user_id, user_id, user_id)
+        cursor.execute(query, values)
+        results = cursor.fetchall()
+        users = [Users(result[1], result[2], result[3], result[4], result[5], user_id=result[0])
+                 for result in results]
+        return users
 
 
 class GroupMassagesService:

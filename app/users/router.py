@@ -11,7 +11,6 @@ from app.users.service import UserService, FriendService
 from database import rcache
 
 
-
 router = APIRouter(
     prefix="/users", tags=['users']
 )
@@ -24,6 +23,7 @@ templates = Jinja2Templates(directory='app/view')
 async def profile(request: Request, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("profile.html", {"request": request})
 
+
 @router.get("/profile/{id}")
 async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("no-personal-profile.html", {"request": request})
@@ -33,9 +33,11 @@ async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
 async def user(request: Request, user=Depends(get_user_by_token)):
     return user
 
+
 @router.post('/update-data')
 async def user_data(request: Request, user=Depends(get_user_by_token)):
     pass
+
 
 @router.post('/update-avatar')
 async def user_avatar(request: Request, photo_of_profile: UploadFile, user=Depends(get_user_by_token)):

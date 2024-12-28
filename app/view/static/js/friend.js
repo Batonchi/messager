@@ -14,7 +14,7 @@ async function get_users(e) {
         for (const user of users) {
             users_div.insertAdjacentHTML('beforeend', `
                 <div class="scroll-elem">
-                    <div class="image-box" style="background-image: url(/static/avatars/${user.photo_of_profile}.png);" onclick=""></div>
+                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png');" onclick=""></div>
                     <div class="content">
                         <span>ФАМИЛИЯ: ${user.last_name}</span>
                         <span>ИМЯ: ${user.first_name}</span>
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded',  async () => {
         for (const user of users) {
             friends.insertAdjacentHTML('beforeend', `
                                 <div class="scroll-elem" onclick="openProfile(${user.user_id})">
-                                    <div class="image-box" style="background-image: url(/static/avatars/${user.photo_of_profile}.png);"></div>
+                                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png');"></div>
                                     <div class="content">
                                         <span>ФАМИЛИЯ: ${user.last_name}</span>
                                         <span>ИМЯ: ${user.first_name}</span>

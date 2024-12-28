@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request, Depends, WebSocket, WebSocketDisconnect
 from app.messages.service import PrivateMessagesService, con_manager
 from app.auth.service import get_user_by_token
+from fastapi.templating import Jinja2Templates
 
 
 router = APIRouter(
@@ -8,9 +9,18 @@ router = APIRouter(
 )
 
 
+templates = Jinja2Templates(directory='app/view')
+
+
 @router.get('')
 async def chats_page(request: Request, user=Depends(get_user_by_token)):
-    pass
+    return templates.TemplateResponse("messages.html", {"request": request})
+
+
+@router.get('/all')
+async def get_all(user=Depends(get_user_by_token)):
+    return PrivateMessagesService.get_all_chats(user.user_id)
+
 
 @router.get('/get')
 async def request(request: Request,  user2_id: int, user=Depends(get_user_by_token)):

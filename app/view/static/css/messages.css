@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(228, 219, 196);
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 400;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    z-index: -100;
+}
+
+.message-frame {
+    width: 1217px;
+}
+
+.message-frame__header {
+
+}
