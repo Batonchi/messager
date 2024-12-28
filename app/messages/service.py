@@ -17,7 +17,7 @@ class PrivateMessagesService:
     @staticmethod
     def find_chat(user1_id: int, user2_id: int):
         conn, cursor = get_connection()
-        query = 'select * from messages where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
+        query = 'select * from private_messages where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
         values = (user1_id, user2_id, user2_id, user1_id)
         cursor.execute(query, values)
         results = cursor.fetchall()

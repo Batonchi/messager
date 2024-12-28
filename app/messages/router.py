@@ -14,7 +14,7 @@ templates = Jinja2Templates(directory='app/view')
 
 @router.get('')
 async def chats_page(request: Request, user=Depends(get_user_by_token)):
-    return templates.TemplateResponse("messages.html", {"request": request})
+    return templates.TemplateResponse("messages.html", {"request": request, "current_user_id": user.user_id})
 
 
 @router.get('/all')
@@ -27,14 +27,14 @@ async def request(request: Request,  user2_id: int, user=Depends(get_user_by_tok
     return PrivateMessagesService.find_chat(user.user_id, user2_id)
 
 
-@router.websocket('/send/{recipient_id}')
-async def websocket_send_message(websoket: WebSocket, recipient_id: int, user=Depends(get_user_by_token)):
-    await con_manager.connect(websoket, user_id=user.user_id)
+@router.websocket('/send/{current_user_id}')
+async def websocket_send_message(websoket: WebSocket, current_user_id: int, user2_id: int):
+    await con_manager.connect(websoket, user_id=current_user_id)
     try:
         while True:
             text_message = await websoket.receive_text()
-            PrivateMessagesService.save(user.user_id, recipient_id, text_message)
-            await con_manager.send_message(user.user_id, recipient_id)
+            PrivateMessagesService.save(current_user_id, user2_id, text_message)
+            await con_manager.send_message(current_user_id, user2_id)
     except WebSocketDisconnect:
         con_manager.disconnect(websoket)
 
