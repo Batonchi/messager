@@ -15,15 +15,11 @@ async function get_current_chat(user2_id) {
             get_messages(user2_id)
         }
     }
-    
-}
-
-
-async function send_message() {
-    // ФУНКЦИЯ ОТПРАВКИ СООБЩЕНИЯ
-    // ПОЛУЧИМ ТЕКСТ С ИНПУТА и тд.
-    text = ''
-    ws.send(text)
+    document.getElementById('send').addEventListener('click', async e => {
+        e.preventDefault();
+        const message = document.getElementById('message').value
+        ws.send(message)
+    })
 }
 
 
