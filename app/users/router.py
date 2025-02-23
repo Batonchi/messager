@@ -2,12 +2,12 @@ import pickle
 import os
 
 
-from fastapi import APIRouter, Request, Depends, UploadFile
+from fastapi import APIRouter, Request, Depends, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from typing import Optional
 from app.auth.service import get_user_by_token
-from app.users.service import UserService, FriendService
+from app.users.service import UserService, FriendService, NotificationService, con_manager
 from database import rcache
 
 
@@ -26,7 +26,7 @@ async def profile(request: Request, user=Depends(get_user_by_token)):
 
 @router.get("/profile/{id}")
 async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
-    return templates.TemplateResponse("no-personal-profile.html", {"request": request})
+    return templates.TemplateResponse("no-personal-profile.html", {"request": request, "current_user_id": user.user_id})
 
 
 @router.get("/user")
@@ -60,10 +60,28 @@ async def friends(request: Request, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("friends.html", {"request": request})
 
 
-@router.post("/friend/add")
-async def add_friend(request: Request, friend_id: int, user=Depends(get_user_by_token)):
-    FriendService.save(user.id, friend_id)
-    FriendService.save(friend_id, user.id)
+@router.websocket('/friend/add/{friend_id}')
+async def websocket_send_notification(web_soket: WebSocket, current_user_id: int, friend_id: int):
+    await con_manager.connect(web_soket, user_id=current_user_id)
+    try:
+        while True:
+            text_message = await web_soket.receive_text()
+            NotificationService.save(friend_id, user.user_id)
+            await con_manager.send_notification(current_user_id, friend_id)
+    except WebSocketDisconnect:
+        con_manager.disconnect(web_soket)
+
+
+@router.post("/friend/accept")
+async def accept_friend(request: Request, friend_id: int, user=Depends(get_user_by_token)):
+    FriendService.save(user.user_id, friend_id)
+    FriendService.save(friend_id, user.user_id)
+    NotificationService.accept(user.user_id, friend_id)
+
+
+@router.get('/notification/list')
+async def notification_list(request: Request, user=Depends(get_user_by_token)):
+    return NotificationService.find_all(user.user_id)
 
 
 @router.post("/friend/remove")
@@ -74,6 +92,8 @@ async def remove_friend(request: Request, user=Depends(get_user_by_token)):
 @router.get("/friend/list")
 async def list_friends(request: Request, user=Depends(get_user_by_token)):
     return FriendService.find_all(user.user_id)
+
+
 
 
 

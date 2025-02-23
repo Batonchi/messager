@@ -11,5 +11,5 @@ document.getElementById('login').addEventListener('submit', async (event) => {
         alert("Ой! Что то пошло не так :(")
         return
     }
-    window.location.href="/users/profile"
+    window.location.href="/chat"
 })

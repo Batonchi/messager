@@ -3,39 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messages</title>
+    <title>Сообщения</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC:wght@300;400;700&family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&family=Lilita+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <input type="hidden" name="" id="current_user_id" value="{{ current_user_id }}">
-    <section class="background">
-        <img src="static/images/messages/bird_back.svg" alt="">
+<input type="hidden" id="current_user_id" value="{{current_user_id}}">
+    <div class="back" style="background-image: url('/static/images/messages/back.svg');"></div>
+    <section>
+        <div class="header">
+            <div class="avatar" onclick="" style="width: 140px; height: 140px; background-color: rgba(72, 72, 72, 1);">
+                <p id="user_name" style="cursor: pointer; color: white; font-family: inherit; font-size: 20px;" onclick="window.location.href='/users/profile'">ИМЯ</p>
+            </div>
+            <div class="header_text">
+                <h1>ТВОИ СООБЩЕНИЯ</h1>
+                <h2>GOSSCHATER</h2>
+            </div>
+            <div class="exit-btn">X</div>
+        </div>
+        <div class="message-div_container__scroll" id="chats">
+            <input type="text" id="search_chat" placeholder="ПОИСК">
+            <label for="search_chat"><img src="/static/images/messages/search.svg" alt=""></label>
+            <div id="scroll_area"></div>
+            <label>xxx</label>
+        </div>
+        <div class="left">
+            <input type="text" class="send_message" id="send_message">
+            <label for="send_message" id="send">
+                <img src="/static/images/messages/circle-arrow-right.svg" alt="">
+            </label>
+            <div class="div__scroll_current_chat" id="chatick">
+            </div>
+        </div>
     </section>
-    <section class="message-frame">
-        <div class="message-frame__header">
-            <div class="avatar"><p class="name"></p></div>
-            <p class="back-header">GOSSCHATTER</p>
-            <p class="forward-header">ТВОИ СООБЩЕНИЯ</p>
-            <img src="" alt="" onclick="">
-        </div>
-        <div class="message-frame__scroll-chats" id="chats">
-            <form action="message.html" method="post" id="search">
-                <input type="text">
-                <button class="search__btn"></button>
-            </form>
-            <div id="scroll-chats-container" class="scroll-chats-container"></div>
-        </div>
-        <div class="message-frame__scroll-messages">
-            <div class="scroll-messages-container" id="scroll-messages-container"></div>
-            <form action="" class="send-messages-form">
-                <input type="text" id="message" placeholder="Введите текст сообщения...">
-                <button class="send-form__btn" id="send"><img src="" alt=""></button>
-            </form>
-        </div>
-    </section>
-    <link rel="stylesheet" href="static/css/messages.css">
+    <link rel="stylesheet" href="/static/css/messages.css">
     <script src="/static/js/message.js"></script>
 </body>
 </html>

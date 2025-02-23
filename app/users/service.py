@@ -1,7 +1,9 @@
 from psycopg2._psycopg import cursor
 
-from app.users.model import Friends, Users
+from app.users.model import Users
 from database import get_connection
+
+from fastapi import WebSocket
 
 
 class UserService:
@@ -10,7 +12,8 @@ class UserService:
         conn, cursor = get_connection()
         query = ('insert into users (first_name, last_name, email, birth_date, photo_of_profile, password)'
                  'values (%s, %s, %s, %s, %s, %s)')
-        values = (user.first_name, user.last_name, user.email, user.birth_date, str(user.photo_of_profile), user.password)
+        values = (
+        user.first_name, user.last_name, user.email, user.birth_date, str(user.photo_of_profile), user.password)
         cursor.execute(query, values)
         conn.commit()
 
@@ -44,7 +47,7 @@ class UserService:
         users = [Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
                  for result in results]
         return users
-        
+
 
 class FriendService:
     @staticmethod
@@ -67,7 +70,6 @@ class FriendService:
         users = [Users(result[1], result[2], result[3], result[4], result[5], user_id=result[0])
                  for result in results]
         return users
-        
 
     @staticmethod
     def delete(user_id: int, friend_id: int):
@@ -80,10 +82,10 @@ class FriendService:
 
 class NotificationService:
     @staticmethod
-    def save(friend: Friends):
+    def save(friend_id: int, user_id: int):
         conn, cursor = get_connection()
         query = 'insert into notification (user_id, friend_id) values (%s, %s)'
-        values = (friend.user_id, friend.friend_id)
+        values = (user_id, friend_id)
         cursor.execute(query, values)
         conn.commit()
 
@@ -94,3 +96,33 @@ class NotificationService:
         values = (user_id, friend_id)
         cursor.execute(query, values)
         conn.commit()
+
+    @staticmethod
+    def find_all(friend_id: int):
+        conn, cursor = get_connection()
+        cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
+         WHERE notification.friend_id = %s AND notification.accept = 'false' ''', (friend_id,))
+        users = [Users(result[1], result[2], user_id=result[0])
+                 for result in cursor.fetchall()]
+        return users
+
+
+class ConnectionNotificationManager:
+    def __init__(self):
+        self.active_connections: dict[int, WebSocket] = {}
+
+    async def connect(self, websocket: WebSocket, user_id: int):
+        await websocket.accept()
+        self.active_connections[user_id] = websocket
+
+    async def disconnect(self, user_id: int):
+        if user_id in self.active_connections:
+            del self.active_connections[user_id]
+
+    async def send_notification(self, user_id: int, friend_id: int):
+        websocket = self.active_connections.get(friend_id)
+        if websocket:
+            await websocket.send_text(str(user_id))
+
+
+con_manager = ConnectionNotificationManager()

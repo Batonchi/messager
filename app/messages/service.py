@@ -3,12 +3,13 @@ from app.users.model import Users
 from database import get_connection
 from fastapi import WebSocket
 
+
 class PrivateMessagesService:
 
     @staticmethod
     def save(sender_id, recipient_id, text_message):
         conn, cursor = get_connection()
-        query = ('insert into private_message '
+        query = ('insert into private_messages '
                  '(sender_id, recipient_id, text_message) values (%s, %s, %s)')
         values = (sender_id, recipient_id, text_message)
         cursor.execute(query, values)
@@ -17,14 +18,17 @@ class PrivateMessagesService:
     @staticmethod
     def find_chat(user1_id: int, user2_id: int):
         conn, cursor = get_connection()
-        query = 'select * from private_messages where (sender_id = %s and recipient_id = %s) or (sender_id = %s and recipient_id = %s)'
+        query = '''SELECT private_message_id, sender_id, CONCAT(senders.first_name, ' ', senders.last_name) as sender,
+       text_message, date_sending FROM private_messages
+JOIN users as senders ON private_messages.sender_id = senders.user_id
+WHERE (sender_id = %s AND recipient_id = %s) OR (sender_id = %s AND recipient_id = %s)'''
         values = (user1_id, user2_id, user2_id, user1_id)
         cursor.execute(query, values)
         results = cursor.fetchall()
         messages = []
         if not results:
             return messages
-        messages = [PrivateMessages(result[1], result[2], result[3], result[4], result[0]) for result in results]
+        messages = [PrivateMessages(result[0], result[1], result[2], result[3], result[4]) for result in results]
         return messages
 
     @staticmethod
@@ -52,8 +56,7 @@ class GroupMassagesService:
         conn.commit()
 
 
-
-class ConnectionManager:
+class ConnectionMessageManager:
     def __init__(self):
         self.active_connections: dict[int, WebSocket] = {}
 
@@ -69,8 +72,6 @@ class ConnectionManager:
         websocket = self.active_connections.get(recipient_id)
         if websocket:
             await websocket.send_text(str(sender_id))
-        websocket = self.active_connections.get(sender_id)
-        if websocket:
-            await websocket.send_text(str(recipient_id))
 
-con_manager = ConnectionManager()
+
+con_manager = ConnectionMessageManager()
