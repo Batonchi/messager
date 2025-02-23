@@ -1,3 +1,12 @@
+const current_user_id = document.getElementById('current_user_id').value
+const ws = new WebSocket(`/users/friend/add/${current_user_id}`)
+ws.onmessage = function(event) {
+    if (event.data == current_user_id) {
+        console.log('ПРОВЕРКА НЕТ ЛИ ЗАЯВОК В ДРУЗЬЯ')
+    }
+}
+
+
 async function get_users(e) {
     e.preventDefault()
     const search = document.getElementById('input_str').value
@@ -53,3 +62,5 @@ async function addFriends(userId) {
 async function openProfile(userId) {
     window.location.href = `/users/profile/${userId}`, {method: 'get'}
 }
+
+

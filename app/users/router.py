@@ -57,16 +57,16 @@ async def search(request: Request, search_str: str, user=Depends(get_user_by_tok
 
 @router.get('/friends')
 async def friends(request: Request, user=Depends(get_user_by_token)):
-    return templates.TemplateResponse("friends.html", {"request": request})
+    return templates.TemplateResponse("friends.html", {"request": request, "current_user_id": user.user_id})
 
 
-@router.websocket('/friend/add/{friend_id}')
-async def websocket_send_notification(web_soket: WebSocket, current_user_id: int, friend_id: int):
+@router.websocket('/friend/add/{current_user_id}')
+async def websocket_send_notification(web_soket: WebSocket, current_user_id: int, friend_id: int = None):
     await con_manager.connect(web_soket, user_id=current_user_id)
     try:
         while True:
-            text_message = await web_soket.receive_text()
-            NotificationService.save(friend_id, user.user_id)
+            await web_soket.receive_text()
+            NotificationService.save(friend_id, current_user_id)
             await con_manager.send_notification(current_user_id, friend_id)
     except WebSocketDisconnect:
         con_manager.disconnect(web_soket)
