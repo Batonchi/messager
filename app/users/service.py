@@ -28,6 +28,18 @@ class UserService:
             return None
         user = Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
         return user
+    
+    @staticmethod
+    def find_by_id(user_id: int):
+        conn, cursor = get_connection()
+        query = 'select * from users where user_id=%s'
+        values = (user_id,)
+        cursor.execute(query, values)
+        result = cursor.fetchone()
+        if not result:
+            return None
+        user = Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
+        return user
 
     @staticmethod
     def find_by_any(search, user_Id):
@@ -129,10 +141,10 @@ class ConnectionNotificationManager:
         if user_id in self.active_connections:
             del self.active_connections[user_id]
 
-    async def send_notification(self, user_id: int, friend_id: int):
+    async def send_notification(self, friend_id: int):
         websocket = self.active_connections.get(friend_id)
         if websocket:
-            await websocket.send_text(str(user_id))
+            await websocket.send_text(str(friend_id))
 
 
 con_manager = ConnectionNotificationManager()

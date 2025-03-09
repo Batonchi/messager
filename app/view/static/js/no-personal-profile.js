@@ -6,7 +6,7 @@ const ws = new WebSocket(`/users/friend/add/${current_user_id}?friend_id=${frien
 
 
 async function get_user() {
-    await fetch('/users/user').then(response => {
+    await fetch(`/users/user?user_id=${friend_id}`).then(response => {
             return response.json()
         }
     ).then(async (user) => {

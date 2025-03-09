@@ -24,14 +24,16 @@ async def profile(request: Request, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("profile.html", {"request": request})
 
 
-@router.get("/profile/{id}")
-async def profile(request: Request, id: int, user=Depends(get_user_by_token)):
+@router.get("/profile/{user_id}")
+async def profile(request: Request, user_id: int, user=Depends(get_user_by_token)):
     return templates.TemplateResponse("no-personal-profile.html", {"request": request, "current_user_id": user.user_id})
 
 
 @router.get("/user")
-async def user(request: Request, user=Depends(get_user_by_token)):
-    return user
+async def user(request: Request, user_id: int = None, user=Depends(get_user_by_token)):
+    if not user_id:
+        return user
+    return UserService.find_by_id(user_id)
 
 
 @router.post('/update-data')
@@ -67,7 +69,7 @@ async def websocket_send_notification(web_soket: WebSocket, current_user_id: int
         while True:
             await web_soket.receive_text()
             NotificationService.save(friend_id, current_user_id)
-            await con_manager.send_notification(current_user_id, friend_id)
+            await con_manager.send_notification(friend_id)
     except WebSocketDisconnect:
         con_manager.disconnect(web_soket)
 
