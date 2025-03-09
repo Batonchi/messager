@@ -79,6 +79,16 @@ class FriendService:
         cursor.execute(query, values)
         conn.commit()
 
+    @staticmethod
+    def check_friend(friend_id: int, user_id: int):
+        conn, cursor = get_connection()
+        query = '''SELECT accept FROM notification WHERE user_id=%s AND friend_id=%s'''
+        cursor.execute(query, (friend_id, user_id))
+        results = cursor.fetchone()
+        if results:
+            return results[0]
+        return
+
 
 class NotificationService:
     @staticmethod

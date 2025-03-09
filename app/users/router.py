@@ -79,6 +79,11 @@ async def accept_friend(request: Request, friend_id: int, user=Depends(get_user_
     NotificationService.accept(user.user_id, friend_id)
 
 
+@router.get("/check_friend")
+async def check_friend(request: Request, friend_id: int, user=Depends(get_user_by_token)):
+    return FriendService.check_friend(friend_id, user.user_id)
+
+
 @router.get('/notification/list')
 async def notification_list(request: Request, user=Depends(get_user_by_token)):
     return NotificationService.find_all(user.user_id)

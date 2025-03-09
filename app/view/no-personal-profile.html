@@ -14,18 +14,19 @@
     <section class="forward">
         <div class="logo"><img src="/static/images/profile/title.svg" alt=""></div>
         <div class="wild-flex">
-            <form action="" class="data" method="get">
+            <form action="" class="data" method="get" id="user_form">
                 <input type="text" name="first_name" placeholder="Имя" readonly>
                 <input type="text" name="last_name" placeholder="Фамилия" readonly>
                 <input type="date" name="birth_date" placeholder="Дата Рождения" readonly>
-                <textarea maxlength="300"  type="text"  class="about" name="about" placeholder="О себе" readonly></textarea>
+                <textarea maxlength="300"  type="text"  class="about" name="about" placeholder="О себе" readonly>
+                </textarea>
             </form>
             <div class="flex_buttons">
                 <div class="photo-of-profile" id="photo-of-profile">
                     <img src="" alt="">
                     <div><a href="">ДРУЗЬЯ</a></div>
                 </div>
-                <button><a href="">ДОБАВИТЬ В ДРУЗЬЯ</a></button>
+                <button><a href="" id="add_friend">ДОБАВИТЬ В ДРУЗЬЯ</a></button>
                 <button><a href="">ВЫЙТИ</a></button>
             </div>
         </div>
