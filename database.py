@@ -3,7 +3,6 @@ import redis
 
 from constant import *
 
-
 rcache = redis.Redis(host='localhost', port=6379, db=0)
 
 
@@ -58,9 +57,11 @@ def create_database():
             friend_id INTEGER REFERENCES users(user_id),
             user_id INTEGER REFERENCES users(user_id),
             accept BOOLEAN
+            
         );    
     """
     cursor.execute(query)
     conn.commit()
+
+
 create_database()
-    
