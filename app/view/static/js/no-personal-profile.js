@@ -29,7 +29,9 @@ async function get_user() {
                 case null:
                     button.textContent = 'Добавить в друзья'
                     button.addEventListener('click', async (event) => {
-                        ws.send()
+                        event.preventDefault()
+                        ws.send('************')
+                        location.reload()
                     })
                     break
             }
