@@ -1,6 +1,6 @@
 import pickle
 import os
-
+from datetime import date
 
 from fastapi import APIRouter, Request, Depends, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.responses import RedirectResponse
@@ -35,8 +35,9 @@ async def user(request: Request, user=Depends(get_user_by_token)):
 
 
 @router.post('/update-data')
-async def user_data(request: Request, user=Depends(get_user_by_token)):
-    pass
+async def user_data(request: Request, first_name: str, last_name: str, email: str, birth_date: date, about: str = '',
+                    user=Depends(get_user_by_token)):
+    UserService.update(user.user_id, first_name, last_name, email, birth_date, about)
 
 
 @router.post('/update-avatar')
@@ -84,9 +85,14 @@ async def check_friend(request: Request, friend_id: int, user=Depends(get_user_b
     return FriendService.check_friend(friend_id, user.user_id)
 
 
-@router.get('/notification/list')
+@router.get('/notification/list-your-requests')
 async def notification_list(request: Request, user=Depends(get_user_by_token)):
-    return NotificationService.find_all(user.user_id)
+    return NotificationService.find_all(user_id=user.user_id)
+
+
+@router.get('/notification/list-other-requests')
+async def notification_list(request: Request, user=Depends(get_user_by_token)):
+    return NotificationService.find_all(friend_id=user.user_id)
 
 
 @router.post("/friend/remove")

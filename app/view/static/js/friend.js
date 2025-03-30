@@ -23,12 +23,11 @@ async function get_users(e) {
         for (const user of users) {
             users_div.insertAdjacentHTML('beforeend', `
                 <div class="scroll-elem">
-                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png');" onclick=""></div>
+                    <div class="image-box" style="background-image: src='/static/avatars/${user.photo_of_profile}.png';" onclick=""></div>
                     <div class="content">
                         <span>ФАМИЛИЯ: ${user.last_name}</span>
                         <span>ИМЯ: ${user.first_name}</span>
                     </div>
-                    <button onclick="alert('tam')" style="background: none; background-color: rgb(71, 71, 71); width: 200px; height: 100px; outline: none; font-family: inherit; font-size: 28px; color: white; cursor: pointer;">Добавить</button>
                 </div>`)
         }
     })

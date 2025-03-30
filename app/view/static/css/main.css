@@ -21,12 +21,10 @@ body {
     font-weight: 700;
     font-style: normal;
     font-size: 23px;
-    padding: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: #E4DBC4;
-    display: flex;
 }
 
 /*Начало секции*/

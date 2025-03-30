@@ -17,6 +17,7 @@
 body {
     background-color: rgb(228, 219, 196);
     font-family: "LXGW WenKai Mono TC", monospace;
+    z-index: 10;
     font-weight: 400;
     font-style: normal;
     padding: auto;
@@ -232,7 +233,7 @@ h2 {
     top: 0px;
     width: max-content;
     height: max-content;
-    z-index: -1;
+    z-index: 5;
 }
 .search-friends input[type="text"]::placeholder {
     border-radius: 50px;
@@ -261,7 +262,7 @@ h2 {
 .search-friends .scroll-container {
     width: 631px;
     height: 650px;
-    z-index: -2;
+    z-index: 3;
     background-color: rgb(72, 72, 72);
     position: relative;
     bottom: 70px;
@@ -295,7 +296,14 @@ h2 {
     padding-left: 15px;
 }
 .scroll-elem {
+    padding-top: 20px;
     padding-bottom: 15px;
+}
+
+.scroll-elem button {
+    border-radius: 30px;
+    border: none;
+    background-color: rgba(82, 82, 82, 1);
 }
 
 /* section search-friends end */
@@ -334,3 +342,6 @@ h2 {
     padding: 10px 40px;
 }
 /* section responses end */
+img {
+    pointer-events: none;
+}
