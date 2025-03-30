@@ -18,6 +18,7 @@ async function get_user() {
         await fetch(`/users/check_friend?friend_id=${friend_id}`).then(response => {
             return response.json()
         }).then((status) => {
+            console.log(status)
             let button = document.getElementById('add_friend')
             switch (status) {
                 case true:

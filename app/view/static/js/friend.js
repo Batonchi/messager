@@ -1,10 +1,32 @@
 const current_user_id = document.getElementById('current_user_id').value
 const ws = new WebSocket(`/users/friend/add/${current_user_id}`)
-ws.onmessage = function(event) {
+ws.onmessage = async function(event) {
     if (event.data == current_user_id) {
-        console.log('ПРОВЕРКА НЕТ ЛИ ЗАЯВОК В ДРУЗЬЯ')
+        await fetch(`/users/notification/list-other-requests`).then(response => {
+            return response.json()
+        }).then((users) => {
+            const users_div = document.getElementById('in-your')
+            users_div.innerHTML = ''
+            console.log(users)
+            for (const user of users) {
+                users_div.insertAdjacentHTML('beforeend', `
+                    <div class="scroll-elem" onclick="showProfile(${user.user_id})">
+                        <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
+                        <div class="content">
+                            <span>ФАМИЛИЯ: ${user.last_name}</span>
+                            <span>ИМЯ: ${user.first_name}</span>
+                        </div>
+                        <button class="" onclick="addFriend(${user.user_id})">Принять</button>
+                    </div>`)
+            }
+        })
     }
 }
+
+async function addFriend(friend_id){
+    await fetch(`/users/friend/accept?friend_id=${friend_id}`)
+    window.location.reload()
+} 
 
 
 async function get_users(e) {
@@ -15,15 +37,14 @@ async function get_users(e) {
     }
     await fetch(`/users/search?search_str=${search}`).then(response => {
             return response.json()
-        }
-    ).then((users) => {
+        }).then((users) => {
         const users_div = document.getElementById('users')
         users_div.innerHTML = ''
         console.log(users)
         for (const user of users) {
             users_div.insertAdjacentHTML('beforeend', `
-                <div class="scroll-elem">
-                    <div class="image-box" style="background-image: src='/static/avatars/${user.photo_of_profile}.png';" onclick=""></div>
+                <div class="scroll-elem" onclick="showProfile(${user.user_id})">
+                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
                     <div class="content">
                         <span>ФАМИЛИЯ: ${user.last_name}</span>
                         <span>ИМЯ: ${user.first_name}</span>
@@ -31,6 +52,10 @@ async function get_users(e) {
                 </div>`)
         }
     })
+}
+
+function showProfile(user_id) {
+    window.location.href = `/users/profile/${user_id}`
 }
 
 
@@ -50,6 +75,24 @@ document.addEventListener('DOMContentLoaded',  async () => {
                                         <span>ИМЯ: ${user.first_name}</span>
                                     </div>
                                 </div>`)
+        }
+    })
+
+    await fetch(`/users/notification/list-your-requests`).then(response => {
+        return response.json()
+    }).then((users) => {
+        const users_div = document.getElementById('from-your')
+        users_div.innerHTML = ''
+        console.log(users)
+        for (const user of users) {
+            users_div.insertAdjacentHTML('beforeend', `
+                <div class="scroll-elem" onclick="showProfile(${user.user_id})">
+                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
+                    <div class="content">
+                        <span>ФАМИЛИЯ: ${user.last_name}</span>
+                        <span>ИМЯ: ${user.first_name}</span>
+                    </div>
+                </div>`)
         }
     })
 })

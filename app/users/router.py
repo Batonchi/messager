@@ -26,6 +26,8 @@ async def profile(request: Request, user=Depends(get_user_by_token)):
 
 @router.get("/profile/{user_id}")
 async def profile(request: Request, user_id: int, user=Depends(get_user_by_token)):
+    if user_id == user.user_id:
+        return RedirectResponse(url='/users/profile')
     return templates.TemplateResponse("no-personal-profile.html", {"request": request, "current_user_id": user.user_id})
 
 

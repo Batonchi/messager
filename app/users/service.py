@@ -106,6 +106,7 @@ class FriendService:
         query = '''SELECT accept FROM notification WHERE user_id=%s AND friend_id=%s'''
         cursor.execute(query, (user_id, friend_id))
         results = cursor.fetchone()
+        print(results)
         if results:
             return results[0]
         return
@@ -131,15 +132,16 @@ class NotificationService:
     @staticmethod
     def find_all(friend_id: int = None, user_id: int = None):
         conn, cursor = get_connection()
+        print(friend_id)
         if friend_id:
-            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
+            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name, users.photo_of_profile FROM notification JOIN users ON notification.user_id = users.user_id
                      WHERE notification.friend_id = %s AND notification.accept = 'false' ''', (friend_id,))
         elif user_id:
-            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
+            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name, users.photo_of_profile FROM notification JOIN users ON notification.friend_id = users.user_id
                      WHERE notification.user_id = %s AND notification.accept = 'false' ''', (user_id,))
         else:
             return
-        users = [Users(result[1], result[2], user_id=result[0])
+        users = [Users(result[1], result[2], photo_of_profile=result[3], user_id=result[0])
                  for result in cursor.fetchall()]
         return users
 
