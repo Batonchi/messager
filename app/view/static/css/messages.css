@@ -15,6 +15,8 @@ body {
     background-color: rgba(228, 219, 196, 1);
     max-height: 1930px;
     overflow-x: hidden;
+    user-select: none;
+    zoom: 0.8;
 }
 
 h1 {

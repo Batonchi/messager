@@ -6,11 +6,17 @@
 }
 
 body {
-    background-color: rgb(72, 72, 72);
+    background-color: #E4DBC4;
     display: flex;
     justify-content: center;
     scrollbar-width: thin;
     scrollbar-color: rgb(170, 150, 99) transparent;
+    zoom: 0.8;
+    padding-top: 5vh;
+}
+
+img {
+    pointer-events: none;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -102,9 +108,8 @@ body::-webkit-scrollbar-thumb {
     background-color: rgb(71, 71, 71);
     width: 250px;
     height: 250px;
-    position: relative;
-    bottom: 130px;
-    left: 35px;
+    margin-bottom: 80px;
+    margin-left: 30px;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;

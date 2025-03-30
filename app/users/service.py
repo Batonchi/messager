@@ -1,5 +1,5 @@
 from psycopg2._psycopg import cursor
-
+from datetime import date
 from app.users.model import Users
 from database import get_connection
 
@@ -59,6 +59,15 @@ class UserService:
         users = [Users(result[1], result[2], result[3], result[4], result[5], result[6], None, result[0])
                  for result in results]
         return users
+
+    @staticmethod
+    def update(user_id: int, first_name: str, last_name: str, email: str, birth_date: date, about: str = ''):
+        conn, cursor = get_connection()
+        query = 'UPDATE users SET first_name=%s, last_name=%s, email=%s, birth_date=%s, about=%s WHERE user_id=%s'
+        values = (first_name, last_name, email, birth_date, about, user_id)
+        cursor.execute(query, values)
+        conn.commit()
+        cursor.close()
 
 
 class FriendService:
@@ -120,10 +129,16 @@ class NotificationService:
         conn.commit()
 
     @staticmethod
-    def find_all(friend_id: int):
+    def find_all(friend_id: int = None, user_id: int = None):
         conn, cursor = get_connection()
-        cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
-         WHERE notification.friend_id = %s AND notification.accept = 'false' ''', (friend_id,))
+        if friend_id:
+            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
+                     WHERE notification.friend_id = %s AND notification.accept = 'false' ''', (friend_id,))
+        elif user_id:
+            cursor.execute('''SELECT users.user_id, users.first_name, users.last_name FROM notification JOIN users ON notification.user_id = users.user_id
+                     WHERE notification.user_id = %s AND notification.accept = 'false' ''', (user_id,))
+        else:
+            return
         users = [Users(result[1], result[2], user_id=result[0])
                  for result in cursor.fetchall()]
         return users
