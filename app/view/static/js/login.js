@@ -4,7 +4,7 @@ document.getElementById('login').addEventListener('submit', async (event) => {
     response = await fetch(`/login?email=${log_form.email.value}&password=${log_form.password.value}`, {
         method: "POST"
     })
-    if (response.status == 200){
+    if (response.ok){
         window.location.href="/chat"
         return
     }
