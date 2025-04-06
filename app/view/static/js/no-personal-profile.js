@@ -29,6 +29,11 @@ async function get_user() {
                     break
                 case FRIEND.FOR:
                     button.textContent = FRIEND.FOR
+                    button.addEventListener('click', async (event) => {
+                        event.preventDefault()
+                        await fetch(`/users/friend/accept?friend_id=${friend_id}`, {'method': 'POST'})
+                        location.reload()
+                    })
                     break
                 case FRIEND.NOT:
                     button.textContent = FRIEND.NOT
@@ -39,9 +44,11 @@ async function get_user() {
                     })
                     break
             }
+            button.style.display = 'block'
         })
     })
 }
+
 
 document.addEventListener('DOMContentLoaded',  async () => {
     await get_user()

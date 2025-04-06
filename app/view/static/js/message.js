@@ -19,21 +19,30 @@ async function get_messages(user2_id) {
    })
 }
 
+let ws;
+
 async function get_current_chat(user2_id) {
-    get_messages(user2_id)
     const current_user_id = document.getElementById('current_user_id').value
-    let ws = new WebSocket(`/chat/send/${current_user_id}?user2_id=${user2_id}`)
+    // Проверим что веб сокет уже подключен и если это так, то закроем его
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.close();
+    }
+    ws = new WebSocket(`/chat/send/${current_user_id}?user2_id=${user2_id}`)
     ws.onmessage = function(event) {
     if (event.data == user2_id) {
             get_messages(user2_id)
         }
     }
+
+    get_messages(user2_id)
     document.getElementById('send').addEventListener('click', async e => {
         e.preventDefault();
-        let input_message = document.getElementById('send_message')
-        ws.send(input_message.value)
-        get_messages(user2_id)
-        input_message.value = ''
+        const message = document.getElementById('send_message').value
+        if (message.trim() !== '') {
+            ws.send(message)
+            get_messages(user2_id)
+        }
+        document.getElementById('send_message').value = ''
     })
 }
 
