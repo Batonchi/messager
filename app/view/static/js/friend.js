@@ -25,7 +25,7 @@ ws.onmessage = async function(event) {
 
 async function addFriend(friend_id){
     await fetch(`/users/friend/accept?friend_id=${friend_id}`)
-    window.location.reload()
+    location.reload()
 } 
 
 

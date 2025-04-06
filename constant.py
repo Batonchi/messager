@@ -12,3 +12,9 @@ PASSWORD = os.environ.get('PASSWORD')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ALGORITHM = os.environ.get('ALGORITHM')
+
+class FRIEND:
+    NOT = 'Добавить в друзья'
+    FROM = 'Заявка отправлена'
+    FOR = 'Принять заявку'
+    YES = 'В друзьях'

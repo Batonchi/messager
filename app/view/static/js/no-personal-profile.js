@@ -19,19 +19,22 @@ async function get_user() {
             return response.json()
         }).then((status) => {
             console.log(status)
-            let button = document.getElementById('add_friend')
+            const button = document.getElementById('add_friend')
             switch (status) {
-                case true:
-                    button.textContent = 'В ДРУЗЬЯХ'
+                case FRIEND.YES:
+                    button.textContent = FRIEND.YES
                     break
-                case false:
-                    button.textContent = 'Заявка отправлена'
+                case FRIEND.FROM:
+                    button.textContent = FRIEND.FROM
                     break
-                case null:
-                    button.textContent = 'Добавить в друзья'
+                case FRIEND.FOR:
+                    button.textContent = FRIEND.FOR
+                    break
+                case FRIEND.NOT:
+                    button.textContent = FRIEND.NOT
                     button.addEventListener('click', async (event) => {
                         event.preventDefault()
-                        ws.send('************')
+                        ws.send(FRIEND.FROM)
                         location.reload()
                     })
                     break
@@ -43,4 +46,12 @@ async function get_user() {
 document.addEventListener('DOMContentLoaded',  async () => {
     await get_user()
 })
+
+
+class FRIEND {
+    NOT = 'Добавить в друзья'
+    FROM = 'Заявка отправлена'
+    FOR = 'Принять заявку'
+    YES = 'В друзьях'
+}
 

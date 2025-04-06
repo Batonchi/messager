@@ -2,6 +2,7 @@ from psycopg2._psycopg import cursor
 from datetime import date
 from app.users.model import Users
 from database import get_connection
+from constant import FRIEND
 
 from fastapi import WebSocket
 
@@ -103,13 +104,25 @@ class FriendService:
     @staticmethod
     def check_friend(friend_id: int, user_id: int):
         conn, cursor = get_connection()
+        query = '''SELECT * FROM friends WHERE user_id=%s AND friend_id=%s'''
+        cursor.execute(query, (user_id, friend_id))
+        results = cursor.fetchone()
+        if results:
+            return FRIEND.YES
+            
         query = '''SELECT accept FROM notification WHERE user_id=%s AND friend_id=%s'''
         cursor.execute(query, (user_id, friend_id))
         results = cursor.fetchone()
-        print(results)
-        if results:
-            return results[0]
-        return
+        if results and not results[0]:
+            return FRIEND.FROM
+        
+        query = '''SELECT accept FROM notification WHERE user_id=%s AND friend_id=%s'''
+        cursor.execute(query, (friend_id, user_id))
+        results = cursor.fetchone()
+        if results and not results[0]:
+            return FRIEND.FOR
+
+        return FRIEND.NOT
 
 
 class NotificationService:
