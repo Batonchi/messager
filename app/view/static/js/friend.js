@@ -5,26 +5,32 @@ ws.onmessage = async function(event) {
         await fetch(`/users/notification/list-other-requests`).then(response => {
             return response.json()
         }).then((users) => {
-            const users_div = document.getElementById('in-your')
-            users_div.innerHTML = ''
-            console.log(users)
-            for (const user of users) {
-                users_div.insertAdjacentHTML('beforeend', `
-                    <div class="scroll-elem" onclick="showProfile(${user.user_id})">
-                        <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
-                        <div class="content">
-                            <span>ФАМИЛИЯ: ${user.last_name}</span>
-                            <span>ИМЯ: ${user.first_name}</span>
-                        </div>
-                        <button class="" onclick="addFriend(${user.user_id})">Принять</button>
-                    </div>`)
-            }
+            show_info_cells('in-your', users)
         })
     }
 }
 
+function show_info_cells (place_id, list_of_placed_info) {
+    const users_div = document.getElementById(place_id)
+            users_div.innerHTML = ''
+            console.log(list_of_placed_info)
+            for (const user of list_of_placed_info) {
+                const button = '<button className="" onClick="addFriend(${user.user_id})">Принять</button>'
+                users_div.insertAdjacentHTML('beforeend', `
+                    <div class="scroll-elem" onclick="showProfile(${user.user_id})">
+                        <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png');
+                         width: 100px; height: 100px" onclick=""></div>
+                        <div class="content">
+                            <span>ФАМИЛИЯ: ${user.last_name}</span>
+                            <span>ИМЯ: ${user.first_name}</span>
+                        </div>
+                        ${String(place_id) === 'in-your' ? button : ''}
+                    </div>`)
+            }
+}
+
 async function addFriend(friend_id){
-    await fetch(`/users/friend/accept?friend_id=${friend_id}`)
+    await fetch(`/users/friend/accept?friend_id=${friend_id}`, {'method': 'POST'})
     location.reload()
 } 
 
@@ -38,19 +44,7 @@ async function get_users(e) {
     await fetch(`/users/search?search_str=${search}`).then(response => {
             return response.json()
         }).then((users) => {
-        const users_div = document.getElementById('users')
-        users_div.innerHTML = ''
-        console.log(users)
-        for (const user of users) {
-            users_div.insertAdjacentHTML('beforeend', `
-                <div class="scroll-elem" onclick="showProfile(${user.user_id})">
-                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
-                    <div class="content">
-                        <span>ФАМИЛИЯ: ${user.last_name}</span>
-                        <span>ИМЯ: ${user.first_name}</span>
-                    </div>
-                </div>`)
-        }
+            show_info_cells('users', users)
     })
 }
 
@@ -65,36 +59,20 @@ document.addEventListener('DOMContentLoaded',  async () => {
     await fetch('/users/friend/list').then(response => {
         return response.json()
     }).then((users) => {
-        const friends = document.getElementById('friends')
-        for (const user of users) {
-            friends.insertAdjacentHTML('beforeend', `
-                                <div class="scroll-elem" onclick="openProfile(${user.user_id})">
-                                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png');"></div>
-                                    <div class="content">
-                                        <span>ФАМИЛИЯ: ${user.last_name}</span>
-                                        <span>ИМЯ: ${user.first_name}</span>
-                                    </div>
-                                </div>`)
-        }
+        show_info_cells('friends', users)
     })
 
     await fetch(`/users/notification/list-your-requests`).then(response => {
         return response.json()
     }).then((users) => {
-        const users_div = document.getElementById('from-your')
-        users_div.innerHTML = ''
-        console.log(users)
-        for (const user of users) {
-            users_div.insertAdjacentHTML('beforeend', `
-                <div class="scroll-elem" onclick="showProfile(${user.user_id})">
-                    <div class="image-box" style="background-image: url('/static/avatars/${user.photo_of_profile}.png'); width: 100px; height: 100px" onclick=""></div>
-                    <div class="content">
-                        <span>ФАМИЛИЯ: ${user.last_name}</span>
-                        <span>ИМЯ: ${user.first_name}</span>
-                    </div>
-                </div>`)
-        }
+        show_info_cells('from-your', users)
     })
+
+    await fetch(`/users/notification/list-other-requests`).then(response => {
+            return response.json()
+        }).then((users) => {
+            show_info_cells('in-your', users)
+        })
 })
 
 async function addFriends(userId) {

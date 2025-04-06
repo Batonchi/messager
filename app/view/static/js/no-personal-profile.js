@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded',  async () => {
 
 
 class FRIEND {
-    NOT = 'Добавить в друзья'
-    FROM = 'Заявка отправлена'
-    FOR = 'Принять заявку'
-    YES = 'В друзьях'
+    static NOT = 'Добавить в друзья'
+    static FROM = 'Заявка отправлена'
+    static FOR = 'Принять заявку'
+    static YES = 'В друзьях'
 }
 
